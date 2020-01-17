@@ -1,3 +1,4 @@
+import 'package:CountDays/service/dateCalculator.dart';
 import 'package:flutter/material.dart';
 
 class Days extends StatefulWidget {
@@ -6,21 +7,20 @@ class Days extends StatefulWidget {
 }
 
 class _DaysState extends State<Days> {
+  
+  final DateCalculator dateCalculator = DateCalculator();
   var startDay = DateTime(2015, DateTime.october, 1);
   var today = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      height: double.infinity,
-      width: double.infinity,
-      child: ListView(
-        children: <Widget>[
+    return CustomScrollView(slivers: <Widget>[
+      SliverList(
+        delegate: SliverChildListDelegate([
           Padding(
             padding: const EdgeInsets.fromLTRB(20.0, 15.0, 0.0, 15.0),
             child: Text(
-              'Our Days🎊',
+              'Our Current Day🎊',
               style: TextStyle(
                 fontSize: 20.0,
               ),
@@ -45,7 +45,7 @@ class _DaysState extends State<Days> {
             padding: const EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 8.0),
             child: Container(
               height: 200,
-              width: 200,
+              width: 600,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("assets/back.jpg"),
@@ -54,7 +54,7 @@ class _DaysState extends State<Days> {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Container(
-                margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
+                margin: EdgeInsets.fromLTRB(15.0, 15.0, 0.0, 0.0),
                 child: Text(
                   "Days",
                   style: TextStyle(
@@ -69,13 +69,13 @@ class _DaysState extends State<Days> {
             padding: const EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 8.0),
             child: Container(
               height: 200,
-              width: 200,
+              width: 600,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Container(
-                margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
+                margin: EdgeInsets.fromLTRB(15.0, 15.0, 0.0, 0.0),
                 child: Column(
                   children: <Widget>[
                     RichText(
@@ -121,9 +121,31 @@ class _DaysState extends State<Days> {
                 fontSize: 20.0,
               ),
             ),
-          ),
-        ],
+          )
+        ]),
       ),
-    );
+      SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
+              child: Card(
+                elevation: 0.0,
+                child: Center(
+                  child: Text(
+                    '${dateCalculator.aniversaryCalculator(1600)}',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      letterSpacing: 2.0,
+                      color: Colors.lightBlue[100 * (index % 9)],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    ]);
   }
 }
