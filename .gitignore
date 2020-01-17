@@ -392,3 +392,6 @@ build/
 ## I add
 note/
 memo/
+
+# google services
+**/android/app/google-services.json

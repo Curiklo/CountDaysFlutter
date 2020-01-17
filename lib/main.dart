@@ -1,3 +1,4 @@
+import 'package:CountDays/pages/Footer.dart';
 import 'package:CountDays/pages/days.dart';
 import 'package:flutter/material.dart';
 import 'package:CountDays/service/dateCalculator.dart';
@@ -17,7 +18,8 @@ class _CountDaysState extends State<CountDays> {
   var today = DateTime.now();
 
   //grey color
-  final color = const Color(0xFFEEF2F5);
+  final lightBackgroundColor = const Color(0xFFEEF2F5);
+
   final DateCalculator dateCalculator= DateCalculator();
 
   @override
@@ -30,7 +32,7 @@ class _CountDaysState extends State<CountDays> {
     return DefaultTabController(
       length: 5,
       child: Scaffold(
-        backgroundColor: color,
+        backgroundColor: lightBackgroundColor,
         appBar: AppBar(
           title: Row(
             children: <Widget>[
@@ -46,7 +48,7 @@ class _CountDaysState extends State<CountDays> {
                 '${dateCalculator.sentDateFormatted}',
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 15.0,
+                  fontSize: 16.0,
                 ),
               ),
             ],
@@ -70,55 +72,13 @@ class _CountDaysState extends State<CountDays> {
               child: Text('Now I am Building'),
             ),
             Center(
-              child: Text('Now I am Building'),
+              child: Text('This will come in the future'),
             ),
 
           ],
         ),
         /**/
-        bottomNavigationBar: SafeArea(
-          child: Material(
-            child: TabBar(
-              // tab option
-              //isScrollable: true,
-              unselectedLabelColor: Colors.black.withOpacity(0.3),
-              unselectedLabelStyle: TextStyle(fontSize: 12.0),
-              labelColor: Colors.black,
-              labelStyle: TextStyle(fontSize: 16.0),
-              indicatorColor: Colors.orange,
-              indicatorWeight: 2.0,
-              // content of tab
-              tabs: [
-                Tab(
-                  child: Icon(
-                    Icons.favorite,
-                    color: Colors.pink,
-                  ),
-                ),
-                Tab(
-                  child: Icon(
-                    Icons.explore,
-                  ),
-                ),
-                Tab(
-                  child: Icon(
-                    Icons.photo_album,
-                  ),
-                ),
-                Tab(
-                  child: Icon(
-                    Icons.settings,
-                  ),
-                ),
-                Tab(
-                  child: Icon(
-                    Icons.textsms,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
+        bottomNavigationBar: Footer(),
       ),
     );
   }
