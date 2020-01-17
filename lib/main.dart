@@ -1,5 +1,6 @@
 import 'package:CountDays/pages/days.dart';
 import 'package:flutter/material.dart';
+import 'package:CountDays/service/dateCalculator.dart';
 
 void main() => runApp(MaterialApp(
       home: CountDays(),
@@ -11,9 +12,13 @@ class CountDays extends StatefulWidget {
 }
 
 class _CountDaysState extends State<CountDays> {
+  //days for calculation
   var startDay = DateTime(2015, DateTime.october, 1);
   var today = DateTime.now();
+
+  //grey color
   final color = const Color(0xFFEEF2F5);
+  final DateCalculator dateCalculator= DateCalculator();
 
   @override
   void initState() {
@@ -23,7 +28,7 @@ class _CountDaysState extends State<CountDays> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 7,
+      length: 5,
       child: Scaffold(
         backgroundColor: color,
         appBar: AppBar(
@@ -36,12 +41,12 @@ class _CountDaysState extends State<CountDays> {
                   fontSize: 30.0,
                 ),
               ),
-              SizedBox(width: 50),
+              SizedBox(width: 60),
               Text(
-                '$today',
+                '${dateCalculator.sentDateFormatted}',
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 10.0,
+                  fontSize: 15.0,
                 ),
               ),
             ],
@@ -55,20 +60,19 @@ class _CountDaysState extends State<CountDays> {
           children: [
             //tab1
             Days(),
-            Icon(
-              Icons.adb,
-              color: Colors.green,
-              size: 150.0,
+            Center(
+              child: Text('Now I am Building'),
             ),
-            Icon(Icons.loyalty),
-            Icon(Icons.grade),
-            Icon(
-              Icons.android,
-              color: Colors.green,
-              size: 150.0,
+            Center(
+              child: Text('Now I am Building'),
             ),
-            Icon(Icons.store),
-            Icon(Icons.widgets)
+            Center(
+              child: Text('Now I am Building'),
+            ),
+            Center(
+              child: Text('Now I am Building'),
+            ),
+
           ],
         ),
         /**/
@@ -93,12 +97,7 @@ class _CountDaysState extends State<CountDays> {
                 ),
                 Tab(
                   child: Icon(
-                    Icons.add,
-                  ),
-                ),
-                Tab(
-                  child: Icon(
-                    Icons.sentiment_very_satisfied,
+                    Icons.explore,
                   ),
                 ),
                 Tab(
@@ -108,17 +107,12 @@ class _CountDaysState extends State<CountDays> {
                 ),
                 Tab(
                   child: Icon(
-                    Icons.explore,
+                    Icons.settings,
                   ),
                 ),
                 Tab(
                   child: Icon(
-                    Icons.info,
-                  ),
-                ),
-                Tab(
-                  child: Icon(
-                    Icons.import_contacts,
+                    Icons.textsms,
                   ),
                 )
               ],

@@ -18,6 +18,15 @@ class _DaysState extends State<Days> {
       child: ListView(
         children: <Widget>[
           Padding(
+            padding: const EdgeInsets.fromLTRB(20.0, 15.0, 0.0, 15.0),
+            child: Text(
+              'Our Days🎊',
+              style: TextStyle(
+                fontSize: 20.0,
+              ),
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 8.0),
             child: Card(
               child: Center(
@@ -67,20 +76,49 @@ class _DaysState extends State<Days> {
               ),
               child: Container(
                 margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
-                child: RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 2.0,
-                      color: Colors.black,
+                child: Column(
+                  children: <Widget>[
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 2.0,
+                          color: Colors.black,
+                        ),
+                        children: [
+                          TextSpan(text: 'Days'),
+                        ],
+                      ),
                     ),
-                    children: [
-                      TextSpan(
-                          text: 'Days\n${today.difference(startDay).inDays}')
-                    ],
-                  ),
+                    SizedBox(
+                      height: 50.0,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 2.0,
+                          color: Colors.black,
+                        ),
+                        children: [
+                          TextSpan(
+                              text: '${today.difference(startDay).inDays}'),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20.0, 15.0, 0.0, 15.0),
+            child: Text(
+              'Next anniversary🎉',
+              style: TextStyle(
+                fontSize: 20.0,
               ),
             ),
           ),
