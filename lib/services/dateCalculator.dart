@@ -4,6 +4,9 @@ import 'package:intl/date_symbol_data_local.dart';
 class DateCalculator {
   //days for calculation
   var startDay = DateTime(2015, DateTime.october, 1);
+  var qixi = DateTime(2016, DateTime.july, 7);
+  var moleculelab = DateTime(2015, DateTime.october, 17);
+  var birth = DateTime(2000, DateTime.january, 13);
   var today = DateTime.now();
 
   //time format function for app bar
@@ -15,7 +18,7 @@ class DateCalculator {
   }
 
   //cal time for anivarsary
-  String aniversaryCalculator(int dayafter) {
+  String aniversaryDateCalculator(int dayafter) {
     var aniversaryday = startDay.add(new Duration(days: dayafter));
     initializeDateFormatting("en_us");
     var formatter = new DateFormat('y MMMM d  E', "en_us");

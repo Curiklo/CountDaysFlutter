@@ -10,7 +10,7 @@ class PlanWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    print(user);
+    print('user:$user');
     // return either the plan or Authenticate widget
     if (user == null) {
       return Authenticate();

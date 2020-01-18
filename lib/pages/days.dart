@@ -132,7 +132,7 @@ class _DaysState extends State<Days> {
                 elevation: 0.0,
                 child: Center(
                   child: Text(
-                    '${dateCalculator.aniversaryCalculator(1600)}',
+                    '${dateCalculator.aniversaryDateCalculator(1600)}',
                     style: TextStyle(
                       fontSize: 30.0,
                       letterSpacing: 2.0,
