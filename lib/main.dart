@@ -1,6 +1,7 @@
 import 'package:CountDays/pages/Footer.dart';
 import 'package:CountDays/pages/days.dart';
 import 'package:CountDays/pages/planWrapper.dart';
+import 'package:CountDays/pages/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:CountDays/services/dateCalculator.dart';
 import 'package:CountDays/services/auth.dart';
@@ -70,9 +71,7 @@ class _MyAppState extends State<MyApp> {
               Center(
                 child: Text('Now I am Building'),
               ),
-              Center(
-                child: Text('Now I am Building'),
-              ),
+              Setting(),
               Center(
                 child: Text('This will come in the future'),
               ),
