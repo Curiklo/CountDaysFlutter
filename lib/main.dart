@@ -1,7 +1,11 @@
 import 'package:CountDays/pages/Footer.dart';
 import 'package:CountDays/pages/days.dart';
+import 'package:CountDays/pages/planWrapper.dart';
 import 'package:flutter/material.dart';
-import 'package:CountDays/service/dateCalculator.dart';
+import 'package:CountDays/services/dateCalculator.dart';
+import 'package:CountDays/services/auth.dart';
+import 'package:provider/provider.dart';
+import 'package:CountDays/models/user.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,6 +28,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: DefaultTabController(
         length: 5,
         child: Scaffold(
@@ -57,8 +62,9 @@ class _MyAppState extends State<MyApp> {
             children: [
               //tab1
               Days(),
-              Center(
-                child: Text('Now I am Building'),
+              StreamProvider<User>.value(
+                value: AuthService().user,
+                child: PlanWrapper(),
               ),
 
               Center(

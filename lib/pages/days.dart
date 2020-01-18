@@ -1,4 +1,4 @@
-import 'package:CountDays/service/dateCalculator.dart';
+import 'package:CountDays/services/dateCalculator.dart';
 import 'package:flutter/material.dart';
 
 class Days extends StatefulWidget {
@@ -7,7 +7,6 @@ class Days extends StatefulWidget {
 }
 
 class _DaysState extends State<Days> {
-  
   final DateCalculator dateCalculator = DateCalculator();
   var startDay = DateTime(2015, DateTime.october, 1);
   var today = DateTime.now();
