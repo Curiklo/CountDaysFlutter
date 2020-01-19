@@ -1,4 +1,5 @@
 import 'package:CountDays/models/planModel.dart';
+import 'package:CountDays/pages/plan_setting.dart';
 import 'package:CountDays/services/database.dart';
 import 'package:CountDays/services/planList.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,16 @@ class Plan extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    void _showSettingsPanel() {
+      showModalBottomSheet(context: context, builder: (context) {
+        return Container(
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+          child: SettingsForm(),
+        );
+      });
+    }
+
     return StreamProvider<List<PlanModel>>.value(
       value: DatabaseService().plans,
       child: Column(
@@ -33,6 +44,11 @@ class Plan extends StatelessWidget {
               },
             ),
           ),
+          FlatButton.icon(
+              icon: Icon(Icons.settings),
+              label: Text('settings'),
+              onPressed: () => _showSettingsPanel(),
+            ),
           PlanList(),
         ],
       ),

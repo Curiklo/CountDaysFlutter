@@ -1,4 +1,5 @@
 import 'package:CountDays/models/planModel.dart';
+import 'package:CountDays/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
@@ -6,11 +7,9 @@ class DatabaseService {
   DatabaseService({this.titles});
 
   // collection reference
-  final CollectionReference planCollection =
-      Firestore.instance.collection('plans');
+  final CollectionReference planCollection = Firestore.instance.collection('plans');
 
-  Future<void> updatePlanData(
-      String titles, String details, String author) async {
+  Future<void> updatePlanData(String titles, String details, String author) async {
     return await planCollection.document(titles).setData({
       'title': titles,
       'detail': details,
@@ -30,8 +29,22 @@ class DatabaseService {
     }).toList();
   }
 
+  //user data from snapshot
+  PlanData _planDataFromSnapshot(DocumentSnapshot snapshot){
+    return PlanData(
+      titles:snapshot.data['title'] ,
+      detail:snapshot.data['detail'] ,
+      author:snapshot.data['author'] , 
+      );
+  }
+
   // get planmodels stream
   Stream<List<PlanModel>> get plans {
     return planCollection.snapshots().map(_planListFromSnapshot);
+  }
+
+  //get user doc stream
+  Stream<PlanData> get planData{
+    return planCollection.document(titles).snapshots().map(_planDataFromSnapshot);
   }
 }

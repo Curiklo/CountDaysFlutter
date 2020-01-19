@@ -12,22 +12,20 @@ class PlanList extends StatefulWidget {
 class _PlanListState extends State<PlanList> {
   @override
   Widget build(BuildContext context) {
-    final plans = Provider.of<List<PlanModel>>(context);
+    final plans = Provider.of<List<PlanModel>>(context) ?? [];
     print(plans.length);
-    //To Do:need fix (Tried calling: forEach(Closure: (PlanModel) => Null))
-    /*
-    try{
-      plans.forEach((plan) {
-        print(plan.titles);
-        print(plan.author);
-        print(plan.details);
-      });
-    }catch(e){
-      print(e);
-    }
-    */
+
+    plans.forEach((plan) {
+      print(plan.titles);
+      print(plan.author);
+      print(plan.details);
+    });
+
+    //  print(e);
 
     return ListView.builder(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
       itemCount: plans.length,
       itemBuilder: (context, index) {
         return PlanTile(plan: plans[index]);

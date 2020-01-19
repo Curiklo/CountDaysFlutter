@@ -65,7 +65,10 @@ class _MyAppState extends State<MyApp> {
               Days(),
               StreamProvider<User>.value(
                 value: AuthService().user,
-                child: PlanWrapper(),
+                child: MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  home:PlanWrapper(),
+                ),
               ),
 
               Center(

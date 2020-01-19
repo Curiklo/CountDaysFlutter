@@ -28,9 +28,8 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return loading
-        ? Loading()
-        : Container(
+    print("singin");
+    return loading ? Loading() : Container(
             height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
             child: SingleChildScrollView(
