@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 class Loading extends StatefulWidget {
   static const routeName = 'RotationTransition';
@@ -8,39 +9,43 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> with SingleTickerProviderStateMixin {
-  AnimationController animationController;
-  Animation<double> animation;
+  AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    animationController = AnimationController(
+    _controller = AnimationController(
+      duration: const Duration(seconds: 10),
       vsync: this,
-      duration: const Duration(milliseconds: 3000),
-    );
-    animation = CurvedAnimation(
-      parent: animationController,
-      curve: Curves.elasticIn,
-    )..addListener(() => setState(() {}));
+    )..repeat();
   }
 
   @override
   void dispose() {
-    animationController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: RotationTransition(
-        turns: animation,
-        child: Container(
-          height: 80,
-          width: 80,
-          child: FlutterLogo(),
+    return AnimatedBuilder(
+      animation: _controller,
+      child: Container(
+        width: 200.0,
+        height: 200.0,
+        //color: Colors.pink[500],
+        child: const Center(
+          child: FlutterLogo(
+            size: 100.0,
+          ),
         ),
       ),
+      builder: (BuildContext context, Widget child) {
+        return Transform.rotate(
+          angle: _controller.value * 10.0 * math.pi,
+          child: child,
+        );
+      },
     );
   }
 }

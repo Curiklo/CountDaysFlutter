@@ -19,21 +19,30 @@ class Setting extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(15.0, 15.0, 0.0, 0.0),
                 child: Column(
                   children: <Widget>[
-                    RichText(
-                      text: TextSpan(
-                        style: TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 2.0,
-                          color: Colors.black,
-                        ),
-                        children: [
-                          TextSpan(text: 'version'),
-                        ],
-                      ),
-                    ),
                     SizedBox(
                       height: 50.0,
+                    ),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: <Widget>[
+                            RichText(
+                              text: TextSpan(
+                                style: TextStyle(
+                                  fontSize: 30.0,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 2.0,
+                                  color: Colors.black,
+                                ),
+                                children: [
+                                  TextSpan(text: 'version'),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     RichText(
                       text: TextSpan(
