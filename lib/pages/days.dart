@@ -1,4 +1,4 @@
-import 'package:CountDays/services/dateCalculator.dart';
+import 'package:CountDays/services/date_calculator.dart';
 import 'package:flutter/material.dart';
 
 class Days extends StatefulWidget {

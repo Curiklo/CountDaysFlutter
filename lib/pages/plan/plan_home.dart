@@ -1,12 +1,12 @@
-import 'package:CountDays/models/planModel.dart';
-import 'package:CountDays/pages/plan_setting.dart';
+import 'package:CountDays/models/plan.dart';
+import 'package:CountDays/pages/plan/plan_setting.dart';
 import 'package:CountDays/services/database.dart';
-import 'package:CountDays/services/planList.dart';
+import 'package:CountDays/services/plan_list.dart';
 import 'package:flutter/material.dart';
 import 'package:CountDays/services/auth.dart';
 import 'package:provider/provider.dart';
 
-class Plan extends StatelessWidget {
+class PlanHome extends StatelessWidget {
   final AuthService _auth = AuthService();
 
   @override
@@ -21,7 +21,7 @@ class Plan extends StatelessWidget {
       });
     }
 
-    return StreamProvider<List<PlanModel>>.value(
+    return StreamProvider<List<Plan>>.value(
       value: DatabaseService().plans,
       child: Column(
         children: <Widget>[

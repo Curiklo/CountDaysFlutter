@@ -1,4 +1,4 @@
-import 'package:CountDays/models/planModel.dart';
+import 'package:CountDays/models/plan.dart';
 import 'package:CountDays/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -18,10 +18,10 @@ class DatabaseService {
   }
 
   // planmodels list from snapshot
-  List<PlanModel> _planListFromSnapshot(QuerySnapshot snapshot) {
+  List<Plan> _planListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       //print(doc.data);
-      return PlanModel(
+      return Plan(
         titles: doc.data['title'] ?? '',
         details: doc.data['detail'] ?? '',
         author: doc.data['author'] ?? '',
@@ -39,7 +39,7 @@ class DatabaseService {
   }
 
   // get planmodels stream
-  Stream<List<PlanModel>> get plans {
+  Stream<List<Plan>> get plans {
     return planCollection.snapshots().map(_planListFromSnapshot);
   }
 

@@ -1,9 +1,9 @@
 import 'package:CountDays/pages/Footer.dart';
 import 'package:CountDays/pages/days.dart';
-import 'package:CountDays/pages/planWrapper.dart';
+import 'package:CountDays/pages/plan/plan_wrapper.dart';
 import 'package:CountDays/pages/setting.dart';
 import 'package:flutter/material.dart';
-import 'package:CountDays/services/dateCalculator.dart';
+import 'package:CountDays/services/date_calculator.dart';
 import 'package:CountDays/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:CountDays/models/user.dart';

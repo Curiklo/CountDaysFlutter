@@ -1,8 +1,8 @@
-import 'package:CountDays/models/planModel.dart';
+import 'package:CountDays/models/plan.dart';
 import 'package:flutter/material.dart';
 
 class PlanTile extends StatelessWidget {
-  final PlanModel plan;
+  final Plan plan;
   PlanTile({this.plan});
 
   @override
