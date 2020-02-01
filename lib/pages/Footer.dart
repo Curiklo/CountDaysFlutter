@@ -17,7 +17,7 @@ class _FooterState extends State<Footer> {
           unselectedLabelStyle: TextStyle(fontSize: 12.0),
           labelColor: Colors.black,
           labelStyle: TextStyle(fontSize: 16.0),
-          indicatorColor: Colors.orange,
+          indicatorColor: Colors.pink,
           indicatorWeight: 2.0,
           // content of tab
           tabs: [

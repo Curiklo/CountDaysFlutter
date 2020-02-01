@@ -7,14 +7,28 @@ class DatabaseService {
   DatabaseService({this.titles});
 
   // collection reference
-  final CollectionReference planCollection = Firestore.instance.collection('plans');
+  final CollectionReference planCollection =
+      Firestore.instance.collection('plans');
 
-  Future<void> updatePlanData(String titles, String details, String author) async {
-    return await planCollection.document(titles).setData({
+  Future<void> updatePlanData(
+      String uid, String titles, String details, String author) async {
+    return await planCollection.document(uid).setData({
       'title': titles,
       'detail': details,
-      'author': author,
     });
+  }
+
+  Future<void> createPlanData(
+      String titles, String details, String author) async {
+    return await planCollection.document().setData({
+      'title': titles,
+      'detail': details,
+    });
+  }
+
+  Future<void> deletePlanData(Plan plan) async {
+    print(plan.uid);
+    return await planCollection.document(plan.uid).delete();
   }
 
   // planmodels list from snapshot
@@ -24,18 +38,17 @@ class DatabaseService {
       return Plan(
         titles: doc.data['title'] ?? '',
         details: doc.data['detail'] ?? '',
-        author: doc.data['author'] ?? '',
+        uid: doc.documentID,
       );
     }).toList();
   }
 
   //user data from snapshot
-  PlanData _planDataFromSnapshot(DocumentSnapshot snapshot){
+  PlanData _planDataFromSnapshot(DocumentSnapshot snapshot) {
     return PlanData(
-      titles:snapshot.data['title'] ,
-      detail:snapshot.data['detail'] ,
-      author:snapshot.data['author'] , 
-      );
+      titles: snapshot.data['title'],
+      detail: snapshot.data['detail'],
+    );
   }
 
   // get planmodels stream
@@ -44,7 +57,10 @@ class DatabaseService {
   }
 
   //get user doc stream
-  Stream<PlanData> get planData{
-    return planCollection.document(titles).snapshots().map(_planDataFromSnapshot);
+  Stream<PlanData> get planData {
+    return planCollection
+        .document(titles)
+        .snapshots()
+        .map(_planDataFromSnapshot);
   }
 }

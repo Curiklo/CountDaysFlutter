@@ -12,18 +12,16 @@ class _PlanListState extends State<PlanList> {
   @override
   Widget build(BuildContext context) {
     final plans = Provider.of<List<Plan>>(context) ?? [];
-    print(plans.length);
+    //print(plans.length);
 
     plans.forEach((plan) {
-      print(plan.titles);
-      print(plan.author);
-      print(plan.details);
+      //print(plan.titles);
+      //print(plan.details);
     });
-
-    //  print(e);
 
     return ListView.builder(
       scrollDirection: Axis.vertical,
+      physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: plans.length,
       itemBuilder: (context, index) {

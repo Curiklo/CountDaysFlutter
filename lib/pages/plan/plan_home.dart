@@ -11,46 +11,44 @@ class PlanHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    void _showSettingsPanel() {
-      showModalBottomSheet(context: context, builder: (context) {
-        return Container(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-          child: SettingsForm(),
-        );
-      });
-    }
-
     return StreamProvider<List<Plan>>.value(
       value: DatabaseService().plans,
-      child: Column(
-        children: <Widget>[
-          Container(
-            child: FlatButton.icon(
-              icon: Icon(Icons.person),
-              label: Text('logout'),
-              onPressed: () async {
-                await _auth.signOut();
-              },
-            ),
+      child: Scaffold(
+        backgroundColor: Color(0xFFEEF2F5),
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: FlatButton.icon(
+                  icon: Icon(Icons.person),
+                  label: Text('logout'),
+                  onPressed: () async {
+                    await _auth.signOut();
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 100.0, 0.0),
+                child: Text(
+                  'What are we gonna do ? 🎃',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
+              PlanList(),
+            ],
           ),
-          Container(
-            child: FlatButton.icon(
-              icon: Icon(Icons.person),
-              label: Text('logout'),
-              onPressed: () async {
-                await DatabaseService(titles: 'titles')
-                    .updatePlanData('0', 'new crew member', 'name');
-              },
-            ),
-          ),
-          FlatButton.icon(
-              icon: Icon(Icons.settings),
-              label: Text('settings'),
-              onPressed: () => _showSettingsPanel(),
-            ),
-          PlanList(),
-        ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0))),
+          backgroundColor: Colors.pink,
+          onPressed: () {
+            DatabaseService().createPlanData('titles', 'details', 'author');
+          },
+        ),
       ),
     );
   }

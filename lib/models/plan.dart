@@ -1,7 +1,7 @@
 class Plan {
   final String titles;
   final String details;
-  final String author;
+  final String uid;
 
-  Plan({this.titles, this.details, this.author});
+  Plan({this.uid, this.titles, this.details});
 }
