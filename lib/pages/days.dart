@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:CountDays/services/date_calculator.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,24 @@ class _DaysState extends State<Days> {
   final DateCalculator dateCalculator = DateCalculator();
   var startDay = DateTime(2015, DateTime.october, 1);
   var today = DateTime.now();
+  Timer timer;
+
+  @override
+  void initState() {
+    super.initState();
+    print(today);
+    timer = Timer.periodic(
+        Duration(milliseconds: 300),
+        (timer) => setState(() {
+              today = DateTime.now();
+            }));
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
