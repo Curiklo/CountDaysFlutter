@@ -11,14 +11,20 @@ class PlanTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void _showSettingsPanel(Plan plan) {
-      showModalBottomSheet(
+      showDialog(
         context: context,
         builder: (context) {
           return Provider<Plan>.value(
             value: plan,
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-              child: SettingsForm(),
+            child: Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0)),
+              backgroundColor: const Color(0xFFEEF2F5),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                child: SettingsForm(),
+              ),
             ),
           );
         },

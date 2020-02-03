@@ -20,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   final lightBackgroundColor = const Color(0xFFEEF2F5);
 
   final DateCalculator dateCalculator = DateCalculator();
+  var now = DateTime.now();
 
   @override
   void initState() {
@@ -67,7 +68,7 @@ class _MyAppState extends State<MyApp> {
                 value: AuthService().user,
                 child: MaterialApp(
                   debugShowCheckedModeBanner: false,
-                  home:PlanWrapper(),
+                  home: PlanWrapper(),
                 ),
               ),
 

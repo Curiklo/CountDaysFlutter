@@ -17,7 +17,6 @@ class _SettingsFormState extends State<SettingsForm> {
   // form values
   String _currenttitle;
   String _currentdetail;
-  String _currentauthor;
 
   @override
   Widget build(BuildContext context) {
@@ -49,44 +48,35 @@ class _SettingsFormState extends State<SettingsForm> {
                     TextFormField(
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
+                      minLines: 5,
                       initialValue: planData.detail,
                       decoration: textInputDecoration,
                       validator: (val) =>
                           val.isEmpty ? 'Please enter a detail' : null,
                       onChanged: (val) => setState(() => _currentdetail = val),
                     ),
-                    /*
-                    DropdownButtonFormField(
-                      value: _currentSugars ?? '0',
-                      decoration: textInputDecoration,
-                      items: sugars.map((sugar) {
-                        return DropdownMenuItem(
-                          value: sugar,
-                          child: Text('$sugar sugars'),
-                        );
-                      }).toList(),
-                    
-                      onChanged: (val) => setState(() => _currentSugars = val ),
-                    ),
-                    */
-
-                    SizedBox(height: 20.0),
-                    RaisedButton(
-                      color: Colors.pink[400],
-                      child: Text(
-                        'Update',
-                        style: TextStyle(color: Colors.white),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: RaisedButton(
+                          color: Colors.pink[400],
+                          child: Text(
+                            'Done',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              await DatabaseService().updatePlanData(
+                                plan.uid,
+                                _currenttitle ?? snapshot.data.titles,
+                                _currentdetail ?? snapshot.data.detail,
+                              );
+                              Navigator.pop(context);
+                            }
+                          },
+                        ),
                       ),
-                      onPressed: () async {
-                        if (_formKey.currentState.validate()) {
-                          await DatabaseService().updatePlanData(
-                              plan.uid,
-                              _currenttitle ?? snapshot.data.titles,
-                              _currentdetail ?? snapshot.data.detail,
-                              _currentauthor ?? snapshot.data.author);
-                          Navigator.pop(context);
-                        }
-                      },
                     ),
                   ],
                 ),

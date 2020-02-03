@@ -10,16 +10,14 @@ class DatabaseService {
   final CollectionReference planCollection =
       Firestore.instance.collection('plans');
 
-  Future<void> updatePlanData(
-      String uid, String titles, String details, String author) async {
+  Future<void> updatePlanData(String uid, String titles, String details) async {
     return await planCollection.document(uid).setData({
       'title': titles,
       'detail': details,
     });
   }
 
-  Future<void> createPlanData(
-      String titles, String details, String author) async {
+  Future<void> createPlanData(String titles, String details) async {
     return await planCollection.document().setData({
       'title': titles,
       'detail': details,

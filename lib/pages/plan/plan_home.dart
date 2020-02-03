@@ -1,5 +1,5 @@
 import 'package:CountDays/models/plan.dart';
-import 'package:CountDays/pages/plan/plan_setting.dart';
+import 'package:CountDays/pages/plan/plan_add.dart';
 import 'package:CountDays/services/database.dart';
 import 'package:CountDays/services/plan_list.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,25 @@ class PlanHome extends StatelessWidget {
   final AuthService _auth = AuthService();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
+    void _showCreatingPanel() {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0)),
+              backgroundColor: const Color(0xFFEEF2F5),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                child: PlanAddForm(),
+              ),
+            );
+        },
+      );
+    }
+
     return StreamProvider<List<Plan>>.value(
       value: DatabaseService().plans,
       child: Scaffold(
@@ -46,7 +64,7 @@ class PlanHome extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(8.0))),
           backgroundColor: Colors.pink,
           onPressed: () {
-            DatabaseService().createPlanData('titles', 'details', 'author');
+            _showCreatingPanel();
           },
         ),
       ),
