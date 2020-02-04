@@ -1,4 +1,5 @@
 import 'package:CountDays/models/plan.dart';
+import 'package:CountDays/pages/plan/plan_detail.dart';
 import 'package:CountDays/pages/plan/plan_setting.dart';
 import 'package:CountDays/services/database.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,31 @@ class PlanTile extends StatelessWidget {
       );
     }
 
+    void _showDetailPanel(Plan plan) {
+      showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (context) {
+          return Container(
+            decoration: BoxDecoration(
+              color: const Color(0xFFEEF2F5),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16.0),
+                  topRight: Radius.circular(16.0)),
+            ),
+            child: Provider<Plan>.value(
+              value: plan,
+              child: Container(
+                //width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+                child: PlanDetailSheet(),
+              ),
+            ),
+          );
+        },
+      );
+    }
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 6.0),
       child: Card(
@@ -52,7 +78,9 @@ class PlanTile extends StatelessWidget {
               onLongPress: () {
                 _showSettingsPanel(plan);
               },
-              onTap: () {},
+              onTap: () {
+                _showDetailPanel(plan);
+              },
             ),
             ButtonBar(
               children: <Widget>[

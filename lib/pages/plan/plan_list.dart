@@ -1,4 +1,4 @@
-import 'package:CountDays/models/plan_tile.dart';
+import 'package:CountDays/pages/plan/plan_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:CountDays/models/plan.dart';
