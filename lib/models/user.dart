@@ -1,7 +1,7 @@
-class User {
+class Person {
   final String uid;
 
-  User({this.uid});
+  Person({this.uid});
 }
 
 class PlanData{

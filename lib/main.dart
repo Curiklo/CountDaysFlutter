@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
             children: [
               //tab1
               Days(),
-              StreamProvider<User>.value(
+              StreamProvider<Person>.value(
                 value: AuthService().user,
                 child: MaterialApp(
                   debugShowCheckedModeBanner: false,

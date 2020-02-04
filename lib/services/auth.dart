@@ -7,12 +7,12 @@ class AuthService {
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   // create user obj based on firebase user
-  User _userFromFirebaseUser(FirebaseUser user) {
-    return user != null ? User(uid: user.uid) : null;
+  Person _userFromFirebaseUser(FirebaseUser user) {
+    return user != null ? Person(uid: user.uid) : null;
   }
 
   // auth change user stream
-  Stream<User> get user {
+  Stream<Person> get user {
     return _auth.onAuthStateChanged
         //.map((FirebaseUser user) => _userFromFirebaseUser(user));
         .map(_userFromFirebaseUser);

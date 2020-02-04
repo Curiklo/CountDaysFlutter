@@ -395,3 +395,6 @@ memo/
 
 # google services
 **/android/app/google-services.json
+
+# firebase config
+web/index.html
