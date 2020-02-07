@@ -22,14 +22,24 @@ class _PlanDetailSheetState extends State<PlanDetailSheet> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
+                SizedBox(height: 20.0),
                 Text(
-                  'Plan detail',
-                  style: TextStyle(fontSize: 18.0),
+                  '${plan.icon}',
+                  style: TextStyle(fontSize: 30.0),
                 ),
                 SizedBox(height: 20.0),
-                Text('${plan.titles}'),
-                SizedBox(height: 10.0),
-                Text('${plan.details}'),
+                Text(
+                  '${plan.titles}',
+                  style: TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                Text(
+                  '${plan.details}',
+                  style: TextStyle(fontSize: 16.0),
+                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
                   child: SizedBox(

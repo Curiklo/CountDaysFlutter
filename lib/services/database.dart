@@ -10,15 +10,19 @@ class DatabaseService {
   final CollectionReference planCollection =
       Firestore.instance.collection('plans');
 
-  Future<void> updatePlanData(String uid, String titles, String details) async {
+  Future<void> updatePlanData(
+      String uid, String titles, String details, String icon) async {
     return await planCollection.document(uid).setData({
+      'icon': icon,
       'title': titles,
       'detail': details,
     });
   }
 
-  Future<void> createPlanData(String titles, String details) async {
+  Future<void> createPlanData(
+      String titles, String details, String icon) async {
     return await planCollection.document().setData({
+      'icon': icon,
       'title': titles,
       'detail': details,
     });
@@ -34,6 +38,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       //print(doc.data);
       return Plan(
+        icon: doc.data['icon'] ?? '💗',
         titles: doc.data['title'] ?? '',
         details: doc.data['detail'] ?? '',
         uid: doc.documentID,
@@ -44,6 +49,7 @@ class DatabaseService {
   //user data from snapshot
   PlanData _planDataFromSnapshot(DocumentSnapshot snapshot) {
     return PlanData(
+      icon: snapshot.data['icon'],
       titles: snapshot.data['title'],
       detail: snapshot.data['detail'],
     );

@@ -56,8 +56,8 @@ class _MyAppState extends State<MyApp> {
               ],
             ),
             //centerTitle: true,
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
+            backgroundColor: lightBackgroundColor,
+            elevation: 1.0,
           ),
           body: TabBarView(
             // each tab content

@@ -15,6 +15,7 @@ class _SettingsFormState extends State<SettingsForm> {
   final _formKey = GlobalKey<FormState>();
 
   // form values
+  String _currenticon;
   String _currenttitle;
   String _currentdetail;
 
@@ -34,6 +35,17 @@ class _SettingsFormState extends State<SettingsForm> {
                   Text(
                     'Update your idea .',
                     style: TextStyle(fontSize: 18.0),
+                  ),
+                  SizedBox(height: 20.0),
+                  TextFormField(
+                    initialValue: planData.icon,
+                    decoration:
+                        textInputDecoration.copyWith(hintText: "Icon 🔥"),
+                    validator: (val) =>
+                        val.isEmpty ? 'Please enter a Icon' : null,
+                    onChanged: (val) => setState(
+                      () => _currenticon = val,
+                    ),
                   ),
                   SizedBox(height: 20.0),
                   TextFormField(
@@ -67,10 +79,14 @@ class _SettingsFormState extends State<SettingsForm> {
                         ),
                         onPressed: () async {
                           if (_formKey.currentState.validate()) {
+                            print(_currenticon);
+                            print(_currenttitle);
+                            print(_currentdetail);
                             await DatabaseService().updatePlanData(
                               plan.uid,
                               _currenttitle ?? snapshot.data.titles,
                               _currentdetail ?? snapshot.data.detail,
+                              _currenticon ?? snapshot.data.icon,
                             );
                             Navigator.pop(context);
                           }

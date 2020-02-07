@@ -11,6 +11,7 @@ class _PlanAddFormState extends State<PlanAddForm> {
   final _formKey = GlobalKey<FormState>();
 
   // form values
+  String _currenticon;
   String _currenttitle;
   String _currentdetail;
 
@@ -24,6 +25,12 @@ class _PlanAddFormState extends State<PlanAddForm> {
             Text(
               'Write your idea .',
               style: TextStyle(fontSize: 18.0),
+            ),
+            SizedBox(height: 20.0),
+            TextFormField(
+              decoration: textInputDecoration.copyWith(hintText: "Icon 🔥"),
+              validator: (val) => val.isEmpty ? 'Please enter a icon' : null,
+              onChanged: (val) => setState(() => _currenticon = val),
             ),
             SizedBox(height: 20.0),
             TextFormField(
@@ -54,8 +61,10 @@ class _PlanAddFormState extends State<PlanAddForm> {
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       await DatabaseService().createPlanData(
-                          _currenttitle ?? 'Somethig went wrong',
-                          _currentdetail ?? 'Somethig went wrong');
+                        _currenttitle ?? 'Somethig went wrong',
+                        _currentdetail ?? 'Somethig went wrong',
+                        _currenticon ?? '🌠',
+                      );
                       Navigator.pop(context);
                     }
                   },

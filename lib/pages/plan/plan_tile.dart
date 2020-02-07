@@ -63,15 +63,22 @@ class PlanTile extends StatelessWidget {
         margin: EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
         child: Column(
           children: <Widget>[
+            SizedBox(
+              height: 10.0,
+            ),
             ListTile(
               leading: CircleAvatar(
-                radius: 25.0,
-                backgroundColor: Colors.brown[100],
+                backgroundColor: Colors.transparent,
+                radius: 30.0,
+                child: Text(
+                  '${plan.icon}',
+                  style: TextStyle(fontSize: 40.0),
+                ),
               ),
               title: Text(plan.titles),
               subtitle: Text('\n${plan.details}'),
               trailing: Icon(
-                Icons.favorite,
+                Icons.adb,
                 size: 30.0,
                 color: Colors.pink[200],
               ),

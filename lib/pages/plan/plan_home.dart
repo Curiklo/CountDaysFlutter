@@ -46,11 +46,14 @@ class PlanHome extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 100.0, 0.0),
-                child: Text(
-                  'What are we gonna do ? 🎃',
-                  style: TextStyle(
-                    fontSize: 20.0,
+                padding: const EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'What\'s Next ? 🎃',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
                   ),
                 ),
               ),
