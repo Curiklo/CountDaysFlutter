@@ -28,7 +28,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    print("singin");
+    //print("singin");
     return loading ? Loading() : Container(
             height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -71,8 +71,8 @@ class _SignInState extends State<SignIn> {
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () async {
-                          print(email);
-                          print(password);
+                          //print(email);
+                          //print(password);
                           //if validate each form
                           if (_formKey.currentState.validate()) {
                             setState(() => loading = true);

@@ -61,6 +61,7 @@ class _PlanAddFormState extends State<PlanAddForm> {
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       await DatabaseService().createPlanData(
+                        DateTime.now(),
                         _currenttitle ?? 'Somethig went wrong',
                         _currentdetail ?? 'Somethig went wrong',
                         _currenticon ?? '🌠',

@@ -36,17 +36,8 @@ class PlanHome extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Container(
-                child: FlatButton.icon(
-                  icon: Icon(Icons.person),
-                  label: Text('logout'),
-                  onPressed: () async {
-                    await _auth.signOut();
-                  },
-                ),
-              ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+                padding: const EdgeInsets.fromLTRB(15.0, 20.0, 0.0, 0.0),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(

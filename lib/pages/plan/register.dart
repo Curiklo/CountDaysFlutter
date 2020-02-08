@@ -69,8 +69,8 @@ class _RegisterState extends State<Register> {
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () async {
-                        print(email);
-                        print(password);
+                        //print(email);
+                        //print(password);
                         if (_formKey.currentState.validate()) {
                           setState(() => loading = true);
                           dynamic result = await _auth

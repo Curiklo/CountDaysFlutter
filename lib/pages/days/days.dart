@@ -10,17 +10,20 @@ class Days extends StatefulWidget {
 class _DaysState extends State<Days> {
   final DateCalculator dateCalculator = DateCalculator();
   var startDay = DateTime(2015, DateTime.october, 1);
-  var today = DateTime.now();
+  DateTime today;
   Timer timer;
+  int displayweeks;
+  int displaydays;
 
   @override
   void initState() {
     super.initState();
-    print(today);
     timer = Timer.periodic(
         Duration(milliseconds: 300),
         (timer) => setState(() {
               today = DateTime.now();
+              displayweeks = (today.difference(startDay).inDays / 7).floor();
+              displaydays = today.difference(startDay).inDays;
             }));
   }
 
@@ -49,7 +52,7 @@ class _DaysState extends State<Days> {
             child: Card(
               child: Center(
                 child: Text(
-                  'Week\n${(today.difference(startDay).inDays / 7).floor()} ',
+                  'Week\n$displayweeks',
                   style: TextStyle(
                     fontSize: 50.0,
                     letterSpacing: 2.0,
@@ -121,8 +124,7 @@ class _DaysState extends State<Days> {
                           color: Colors.black,
                         ),
                         children: [
-                          TextSpan(
-                              text: '${today.difference(startDay).inDays}'),
+                          TextSpan(text: '$displaydays'),
                         ],
                       ),
                     ),
@@ -151,7 +153,7 @@ class _DaysState extends State<Days> {
                 elevation: 0.0,
                 child: Center(
                   child: Text(
-                    '${dateCalculator.aniversaryDateCalculator(1600)}',
+                    '${dateCalculator.aniversaryDateCalculator(1600 + index * 100)}',
                     style: TextStyle(
                       fontSize: 30.0,
                       letterSpacing: 2.0,

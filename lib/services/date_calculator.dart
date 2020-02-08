@@ -23,6 +23,19 @@ class DateCalculator {
     initializeDateFormatting("en_us");
     var formatter = new DateFormat('y MMMM d  E', "en_us");
     var formatted = formatter.format(aniversaryday); // Date to String
+    //print(formatted);
     return formatted;
+  }
+
+  String dateformater(DateTime datetime){
+      initializeDateFormatting("en_us");
+      var formatter = new DateFormat('y MMMM d  E', "en_us");
+      var formatted = formatter.format(datetime);
+      return formatted;
+  }
+
+  //main calcu
+  String nextAniversaryDateCalculator(){
+    return "";
   }
 }
