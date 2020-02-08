@@ -29,7 +29,9 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     //print("singin");
-    return loading ? Loading() : Container(
+    return loading
+        ? Loading()
+        : Container(
             height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
             child: SingleChildScrollView(
@@ -37,10 +39,14 @@ class _SignInState extends State<SignIn> {
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    FlatButton.icon(
-                      icon: Icon(Icons.person),
-                      label: Text('Register'),
-                      onPressed: () => widget.toggleView(),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: FlatButton.icon(
+                        icon: Icon(Icons.person),
+                        label: Text('Register'),
+                        color: Colors.white,
+                        onPressed: () => widget.toggleView(),
+                      ),
                     ),
                     SizedBox(height: 20.0),
                     TextFormField(
@@ -65,7 +71,10 @@ class _SignInState extends State<SignIn> {
                     ),
                     SizedBox(height: 20.0),
                     RaisedButton(
-                        color: Colors.orange[400],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        color: Colors.pink,
                         child: Text(
                           'Sign In',
                           style: TextStyle(color: Colors.white),

@@ -26,13 +26,13 @@ class _PlanAddFormState extends State<PlanAddForm> {
               'Write your idea .',
               style: TextStyle(fontSize: 18.0),
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 10.0),
             TextFormField(
               decoration: textInputDecoration.copyWith(hintText: "Icon 🔥"),
               validator: (val) => val.isEmpty ? 'Please enter a icon' : null,
               onChanged: (val) => setState(() => _currenticon = val),
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 10.0),
             TextFormField(
               decoration: textInputDecoration.copyWith(hintText: "Title 🚀"),
               validator: (val) => val.isEmpty ? 'Please enter a title' : null,

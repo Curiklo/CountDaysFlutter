@@ -20,8 +20,9 @@ class DatabaseService {
   }
 
   Future<void> createPlanData(
-      String titles, String details, String icon) async {
+      DateTime createat, String titles, String details, String icon) async {
     return await planCollection.document().setData({
+      'create_at': createat,
       'icon': icon,
       'title': titles,
       'detail': details,
@@ -38,7 +39,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       //print(doc.data);
       return Plan(
-        icon: doc.data['icon'] ?? '💗',
+        icon: doc.data['icon'] ?? ' ',
         titles: doc.data['title'] ?? '',
         details: doc.data['detail'] ?? '',
         uid: doc.documentID,
@@ -57,7 +58,10 @@ class DatabaseService {
 
   // get planmodels stream
   Stream<List<Plan>> get plans {
-    return planCollection.snapshots().map(_planListFromSnapshot);
+    return planCollection
+        .orderBy("create_at", descending: true)
+        .snapshots()
+        .map(_planListFromSnapshot);
   }
 
   //get user doc stream

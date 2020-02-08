@@ -29,6 +29,7 @@ dependencies:
   cloud_firestore: ^0.12.9+4
   provider: ^3.1.0
   google_sign_in: ^4.1.1
+  charts_flutter: ^0.8.1
 
 dev_dependencies:
   flutter_test:

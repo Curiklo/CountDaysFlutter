@@ -33,7 +33,7 @@ class _SettingsFormState extends State<SettingsForm> {
               child: Column(
                 children: <Widget>[
                   Text(
-                    'Update your idea .',
+                    'Edit   idea',
                     style: TextStyle(fontSize: 18.0),
                   ),
                   SizedBox(height: 20.0),
@@ -47,7 +47,7 @@ class _SettingsFormState extends State<SettingsForm> {
                       () => _currenticon = val,
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 10.0),
                   TextFormField(
                     initialValue: planData.titles,
                     decoration:

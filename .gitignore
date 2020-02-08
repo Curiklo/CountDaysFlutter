@@ -398,3 +398,8 @@ memo/
 
 # firebase config
 web/index.html
+
+# firebase deploy
+.firebase/
+.firebaserc
+firebase.json

@@ -3,12 +3,9 @@ import 'package:CountDays/pages/plan/plan_add.dart';
 import 'package:CountDays/services/database.dart';
 import 'package:CountDays/pages/plan/plan_list.dart';
 import 'package:flutter/material.dart';
-import 'package:CountDays/services/auth.dart';
 import 'package:provider/provider.dart';
 
 class PlanHome extends StatelessWidget {
-  final AuthService _auth = AuthService();
-
   @override
   Widget build(BuildContext context) {
     void _showCreatingPanel() {

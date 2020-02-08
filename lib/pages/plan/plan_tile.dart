@@ -61,41 +61,47 @@ class PlanTile extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 6.0),
       child: Card(
         margin: EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 10.0,
-            ),
-            ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                radius: 30.0,
-                child: Text(
-                  '${plan.icon}',
-                  style: TextStyle(fontSize: 40.0),
+        child: InkWell(
+          onTap: () {
+            _showDetailPanel(plan);
+          },
+          onLongPress: () {
+            _showSettingsPanel(plan);
+          },
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 10.0,
+              ),
+              ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  radius: 30.0,
+                  child: Text(
+                    '${plan.icon}',
+                    style: TextStyle(fontSize: 40.0),
+                  ),
                 ),
+                title: Text(plan.titles),
+                subtitle: Text('\n${plan.details}'),
+                trailing: Icon(
+                  Icons.adb,
+                  size: 30.0,
+                  color: Colors.pink[200],
+                ),
+                onLongPress: () {
+                  _showSettingsPanel(plan);
+                },
+                onTap: () {
+                  _showDetailPanel(plan);
+                },
               ),
-              title: Text(plan.titles),
-              subtitle: Text('\n${plan.details}'),
-              trailing: Icon(
-                Icons.adb,
-                size: 30.0,
-                color: Colors.pink[200],
-              ),
-              onLongPress: () {
-                _showSettingsPanel(plan);
-              },
-              onTap: () {
-                _showDetailPanel(plan);
-              },
-            ),
-            ButtonBar(
-              children: <Widget>[
-                SizedBox(
-                  height: 35.0,
-                  child: FlatButton(
-                    child: IconButton(
-                      icon: Icon(
+              ButtonBar(
+                children: <Widget>[
+                  SizedBox(
+                    height: 35.0,
+                    child: FlatButton(
+                      child: Icon(
                         Icons.edit,
                         size: 20.0,
                         color: Colors.white,
@@ -103,16 +109,13 @@ class PlanTile extends StatelessWidget {
                       onPressed: () {
                         _showSettingsPanel(plan);
                       },
+                      color: Colors.blue,
                     ),
-                    color: Colors.blue,
-                    onPressed: () {},
                   ),
-                ),
-                SizedBox(
-                  height: 35.0,
-                  child: FlatButton(
-                    child: IconButton(
-                      icon: Icon(
+                  SizedBox(
+                    height: 35.0,
+                    child: FlatButton(
+                      child: Icon(
                         Icons.delete_forever,
                         size: 20.0,
                         color: Colors.white,
@@ -120,14 +123,13 @@ class PlanTile extends StatelessWidget {
                       onPressed: () {
                         DatabaseService().deletePlanData(plan);
                       },
+                      color: Colors.blue,
                     ),
-                    color: Colors.blue,
-                    onPressed: () {},
                   ),
-                ),
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

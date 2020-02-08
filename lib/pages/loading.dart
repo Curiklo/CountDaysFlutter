@@ -10,6 +10,8 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> with SingleTickerProviderStateMixin {
   AnimationController _controller;
+  final lightBackgroundColor = const Color(0xFFEEF2F5);
+  double iconsize = 50.0;
 
   @override
   void initState() {
@@ -30,19 +32,68 @@ class _LoadingState extends State<Loading> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _controller,
-      child: Container(
-        width: 200.0,
-        height: 200.0,
-        //color: Colors.pink[500],
-        child: const Center(
-          child: FlutterLogo(
-            size: 100.0,
+      child: Center(
+        child: Container(
+          width: 100,
+          height: 100,
+          color: lightBackgroundColor,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Transform.rotate(
+                    origin: Offset(0.0, 0.0),
+                    angle: math.pi / -4,
+                    child: Icon(
+                      Icons.favorite,
+                      color: const Color(0xFF4285F4),
+                      size: iconsize,
+                    ),
+                  ),
+                  Transform.rotate(
+                    origin: Offset(0.0, 0.0),
+                    angle: math.pi / -4 * 3,
+                    child: Icon(
+                      Icons.favorite,
+                      color: const Color(0xFF0F9D58),
+                      size: iconsize,
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Transform.rotate(
+                    origin: Offset(0.0, 0.0),
+                    angle: math.pi / 4,
+                    child: Icon(
+                      Icons.favorite,
+                      color: Colors.orange,
+                      size: iconsize,
+                    ),
+                  ),
+                  Transform.rotate(
+                    origin: Offset(0.0, 0.0),
+                    angle: math.pi / 4 * 3,
+                    child: Icon(
+                      Icons.favorite,
+                      color: const Color(0xFFDB4437),
+                      size: iconsize,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
       builder: (BuildContext context, Widget child) {
         return Transform.rotate(
-          angle: _controller.value * 10.0 * math.pi,
+          angle: _controller.value * math.pi * 10,
           child: child,
         );
       },

@@ -36,10 +36,14 @@ class _RegisterState extends State<Register> {
               key: _formKey,
               child: Column(
                 children: <Widget>[
-                  FlatButton.icon(
-                    icon: Icon(Icons.person),
-                    label: Text('Sign In'),
-                    onPressed: () => widget.toggleView(),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: FlatButton.icon(
+                      icon: Icon(Icons.person),
+                      label: Text('Sign In'),
+                      color: Colors.white,
+                      onPressed: () => widget.toggleView(),
+                    ),
                   ),
                   SizedBox(height: 20.0),
                   TextFormField(
@@ -63,7 +67,10 @@ class _RegisterState extends State<Register> {
                   ),
                   SizedBox(height: 20.0),
                   RaisedButton(
-                      color: Colors.orange[400],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      color: Colors.pink,
                       child: Text(
                         'Register',
                         style: TextStyle(color: Colors.white),

@@ -27,15 +27,31 @@ class DateCalculator {
     return formatted;
   }
 
-  String dateformater(DateTime datetime){
-      initializeDateFormatting("en_us");
-      var formatter = new DateFormat('y MMMM d  E', "en_us");
-      var formatted = formatter.format(datetime);
-      return formatted;
+  String dateformater(DateTime datetime) {
+    initializeDateFormatting("en_us");
+    var formatter = new DateFormat('y MMMM d  E', "en_us");
+    var formatted = formatter.format(datetime);
+    return formatted;
+  }
+
+  int dateYear(DateTime today) {
+    if (9 < today.month) {
+      return today.year - 2015;
+    } else {
+      return today.year - 2015 - 1;
+    }
+  }
+
+  int dateMonth(DateTime today) {
+    if (9 < today.month) {
+      return 12 * dateYear(today) + today.month;
+    } else {
+      return 12 * dateYear(today) + today.month - 10;
+    }
   }
 
   //main calcu
-  String nextAniversaryDateCalculator(){
+  String nextAniversaryDateCalculator() {
     return "";
   }
 }
