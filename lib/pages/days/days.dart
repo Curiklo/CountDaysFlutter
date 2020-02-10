@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:CountDays/pages/days/chart.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:fl_chart/fl_chart.dart';
 import 'package:CountDays/services/date_calculator.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +12,7 @@ class Days extends StatefulWidget {
 class _DaysState extends State<Days> {
   final DateCalculator dateCalculator = DateCalculator();
   var startDay = DateTime(2015, DateTime.october, 1);
+  final lightBackgroundColor = const Color(0xFFEEF2F5);
   DateTime today;
   Timer timer;
   int displayweeks;
@@ -42,20 +43,7 @@ class _DaysState extends State<Days> {
   @override
   Widget build(BuildContext context) {
     print('&&');
-    var data = [
-      new ClicksPerYear('2016', 20, Colors.red),
-      new ClicksPerYear('2017', 4, Colors.yellow),
-      new ClicksPerYear('2018', 28, Colors.green),
-    ];
-    var datalist = [
-      charts.Series(
-        id: 'click',
-        domainFn: (ClicksPerYear clickData, _) => clickData.year,
-        measureFn: (ClicksPerYear clickData, _) => clickData.clicks,
-        colorFn: (ClicksPerYear clicData, _) => clicData.color,
-        data: data,
-      )
-    ];
+
     return CustomScrollView(
       slivers: <Widget>[
         SliverList(
@@ -92,7 +80,7 @@ class _DaysState extends State<Days> {
                                   style: TextStyle(
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.w600,
-                                    letterSpacing: 2.0,
+                                    //letterSpacing: 2.0,
                                     color: Colors.black,
                                   ),
                                   children: [
@@ -113,7 +101,7 @@ class _DaysState extends State<Days> {
                                   color: Colors.black,
                                 ),
                                 children: [
-                                  TextSpan(text: '   $displaydays'),
+                                  TextSpan(text: '  $displaydays'),
                                 ],
                               ),
                             ),
@@ -127,7 +115,7 @@ class _DaysState extends State<Days> {
                                   style: TextStyle(
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.w600,
-                                    letterSpacing: 2.0,
+                                    //letterSpacing: 2.0,
                                     color: Colors.black,
                                   ),
                                   children: [
@@ -148,53 +136,16 @@ class _DaysState extends State<Days> {
                                   color: Colors.black,
                                 ),
                                 children: [
-                                  TextSpan(text: '   $displaymonth'),
+                                  TextSpan(text: '    $displaymonth'),
                                 ],
                               ),
                             ),
                           ],
                         ),
-                        Container(
-                          child: Stack(
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    42.0, 10.0, 0.0, 10.0),
-                                child: Container(
-                                  width: 200,
-                                  height: 200,
-                                  child: GaugeChart(
-                                    datalist,
-                                    animate: false,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    84.5, 32.0, 10.0, 0.0),
-                                child: Container(
-                                  width: 115,
-                                  height: 120,
-                                  child: GaugeChart(
-                                    datalist,
-                                    animate: false,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    72.5, 22.0, 20.0, 0.0),
-                                child: Container(
-                                  width: 140,
-                                  height: 140,
-                                  child: GaugeChart(
-                                    datalist,
-                                    animate: false,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(35.0, 0.0, 0.0, 5.0),
+                          child: DaysChart(),
                         ),
                       ],
                     ),
@@ -339,14 +290,4 @@ class _DaysState extends State<Days> {
       ],
     );
   }
-}
-
-class ClicksPerYear {
-  final String year;
-  final int clicks;
-  final charts.Color color;
-
-  ClicksPerYear(this.year, this.clicks, Color color)
-      : this.color = new charts.Color(
-            r: color.red, g: color.green, b: color.blue, a: color.alpha);
 }
