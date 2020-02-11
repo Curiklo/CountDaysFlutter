@@ -3,15 +3,14 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
 class DaysChart extends StatefulWidget {
   final List<Color> availableColors = [
-    Colors.purpleAccent,
-    Colors.yellow,
     Colors.lightBlue,
-    Colors.orange,
     Colors.pink,
-    Colors.redAccent,
+    Colors.lightGreen,
+    Colors.amber,
   ];
 
   @override
@@ -19,72 +18,97 @@ class DaysChart extends StatefulWidget {
 }
 
 class DaysChartState extends State<DaysChart> {
-  final Color barBackgroundColor = Colors.pink[100];
+  final Color barBackgroundColor = Color(0xffFFBBDEFB);
   final Duration animDuration = Duration(milliseconds: 250);
-
+  VideoPlayerController audiocontroller;
   int touchedIndex;
 
   bool isPlaying = false;
 
   @override
+  void initState() {
+    super.initState();
+    audiocontroller = VideoPlayerController.asset('assets/audio/sample.mp3')
+      ..initialize().then((_) {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    audiocontroller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 1.1,
-      child: Card(
-        elevation: 0.0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        color: Colors.white,
-        child: Stack(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 5.0, left: 18.0, right: 40.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: BarChart(
-                        isPlaying ? randomData() : mainBarData(),
-                        swapAnimationDuration: animDuration,
+      child: InkWell(
+        onTap: () {},
+        child: Card(
+          elevation: 0.0,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+          color: Colors.white,
+          child: Stack(
+            children: <Widget>[
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 5.0, left: 18.0, right: 40.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: BarChart(
+                          isPlaying ? randomData() : mainBarData(),
+                          swapAnimationDuration: animDuration,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 1,
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 5.0),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: IconButton(
-                  icon: Icon(
-                    isPlaying ? Icons.pause : Icons.play_arrow,
-                    color: Colors.pinkAccent,
-                    size: 25,
-                  ),
-                  onPressed: () {
-                    setState(
-                      () {
-                        isPlaying = !isPlaying;
-                        if (isPlaying) {
-                          refreshState();
-                        }
-                      },
-                    );
-                  },
+                    const SizedBox(
+                      height: 1,
+                    ),
+                  ],
                 ),
               ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.only(right: 5.0),
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                    icon: Icon(
+                      isPlaying ? Icons.pause : Icons.play_arrow,
+                      color: Colors.pinkAccent,
+                      size: 25,
+                    ),
+                    onPressed: () {
+                      setState(
+                        () {
+                          isPlaying = !isPlaying;
+                          if (isPlaying) {
+                            refreshState();
+                          }
+
+                          audiocontroller.value.isPlaying
+                              ? audiocontroller.pause()
+                              : audiocontroller.play();
+                          print('${audiocontroller.value}');
+                        },
+                      );
+                    },
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -94,7 +118,7 @@ class DaysChartState extends State<DaysChart> {
     int x,
     double y, {
     bool isTouched = false,
-    Color barColor = const Color(0xFFFF00FF),
+    Color barColor = const Color(0xff64B5F6),
     double width = 10,
     List<int> showTooltips = const [],
   }) {
@@ -103,7 +127,7 @@ class DaysChartState extends State<DaysChart> {
       barRods: [
         BarChartRodData(
           y: isTouched ? y + 10 : y,
-          color: isTouched ? Colors.yellow : barColor,
+          color: isTouched ? Colors.lightBlue : barColor,
           width: width,
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
@@ -246,23 +270,23 @@ class DaysChartState extends State<DaysChart> {
       barGroups: List.generate(5, (i) {
         switch (i) {
           case 0:
-            return makeGroupData(0, Random().nextInt(75).toDouble() + 30,
+            return makeGroupData(0, Random().nextInt(75).toDouble() + 40,
                 barColor: widget.availableColors[
                     Random().nextInt(widget.availableColors.length)]);
           case 1:
-            return makeGroupData(1, Random().nextInt(75).toDouble() + 30,
+            return makeGroupData(1, Random().nextInt(75).toDouble() + 40,
                 barColor: widget.availableColors[
                     Random().nextInt(widget.availableColors.length)]);
           case 2:
-            return makeGroupData(2, Random().nextInt(75).toDouble() + 30,
+            return makeGroupData(2, Random().nextInt(75).toDouble() + 40,
                 barColor: widget.availableColors[
                     Random().nextInt(widget.availableColors.length)]);
           case 3:
-            return makeGroupData(3, Random().nextInt(75).toDouble() + 30,
+            return makeGroupData(3, Random().nextInt(75).toDouble() + 40,
                 barColor: widget.availableColors[
                     Random().nextInt(widget.availableColors.length)]);
           case 4:
-            return makeGroupData(4, Random().nextInt(75).toDouble() + 30,
+            return makeGroupData(4, Random().nextInt(75).toDouble() + 40,
                 barColor: widget.availableColors[
                     Random().nextInt(widget.availableColors.length)]);
           default:

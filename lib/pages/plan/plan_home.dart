@@ -2,10 +2,16 @@ import 'package:CountDays/models/plan.dart';
 import 'package:CountDays/pages/plan/plan_add.dart';
 import 'package:CountDays/services/database.dart';
 import 'package:CountDays/pages/plan/plan_list.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PlanHome extends StatelessWidget {
+class PlanHome extends StatefulWidget {
+  @override
+  _PlanHomeState createState() => _PlanHomeState();
+}
+
+class _PlanHomeState extends State<PlanHome> {
   @override
   Widget build(BuildContext context) {
     void _showCreatingPanel() {
@@ -34,7 +40,7 @@ class PlanHome extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.fromLTRB(15.0, 20.0, 0.0, 0.0),
+                padding: const EdgeInsets.fromLTRB(15.0, 30.0, 0.0, 15.0),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(

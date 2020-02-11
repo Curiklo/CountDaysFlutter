@@ -10,9 +10,10 @@ class DatabaseService {
   final CollectionReference planCollection =
       Firestore.instance.collection('plans');
 
-  Future<void> updatePlanData(
-      String uid, String titles, String details, String icon) async {
+  Future<void> updatePlanData(Timestamp updatedat, String uid, String titles,
+      String details, String icon) async {
     return await planCollection.document(uid).setData({
+      'updatedat': updatedat,
       'icon': icon,
       'title': titles,
       'detail': details,
@@ -20,9 +21,9 @@ class DatabaseService {
   }
 
   Future<void> createPlanData(
-      DateTime createat, String titles, String details, String icon) async {
+      Timestamp updatedat, String titles, String details, String icon) async {
     return await planCollection.document().setData({
-      'create_at': createat,
+      'updatedat': updatedat,
       'icon': icon,
       'title': titles,
       'detail': details,
@@ -42,6 +43,7 @@ class DatabaseService {
         icon: doc.data['icon'] ?? ' ',
         titles: doc.data['title'] ?? '',
         details: doc.data['detail'] ?? '',
+        updatedat: doc.data['updatedat'] ?? '',
         uid: doc.documentID,
       );
     }).toList();
@@ -53,13 +55,14 @@ class DatabaseService {
       icon: snapshot.data['icon'],
       titles: snapshot.data['title'],
       detail: snapshot.data['detail'],
+      updatedat: snapshot.data['updatedat'],
     );
   }
 
   // get planmodels stream
   Stream<List<Plan>> get plans {
     return planCollection
-        .orderBy("create_at", descending: true)
+        .orderBy("updatedat", descending: true)
         .snapshots()
         .map(_planListFromSnapshot);
   }

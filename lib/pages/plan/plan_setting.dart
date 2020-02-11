@@ -3,6 +3,7 @@ import 'package:CountDays/models/user.dart';
 import 'package:CountDays/pages/loading.dart';
 import 'package:CountDays/services/database.dart';
 import 'package:CountDays/shared/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -83,6 +84,7 @@ class _SettingsFormState extends State<SettingsForm> {
                             print(_currenttitle);
                             print(_currentdetail);
                             await DatabaseService().updatePlanData(
+                              Timestamp.now(),
                               plan.uid,
                               _currenttitle ?? snapshot.data.titles,
                               _currentdetail ?? snapshot.data.detail,

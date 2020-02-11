@@ -399,6 +399,9 @@ memo/
 # firebase config
 web/index.html
 
+# assets
+assets/audio/
+
 # firebase deploy
 .firebase/
 .firebaserc
