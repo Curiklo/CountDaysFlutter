@@ -34,77 +34,75 @@ class _StartLoadingState extends State<StartLoading>
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: lightBackgroundColor,
-        body: AnimatedBuilder(
-          animation: _controller,
-          child: Center(
-            child: Container(
-              width: 100,
-              height: 100,
-              color: lightBackgroundColor,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Transform.rotate(
-                        origin: Offset(0.0, 0.0),
-                        angle: math.pi / -4,
-                        child: Icon(
-                          Icons.favorite,
-                          color: const Color(0xFF4285F4),
-                          size: iconsize,
-                        ),
+    return Container(
+      color: lightBackgroundColor,
+      child: AnimatedBuilder(
+        animation: _controller,
+        child: Center(
+          child: Container(
+            width: 100,
+            height: 100,
+            color: lightBackgroundColor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Transform.rotate(
+                      origin: Offset(0.0, 0.0),
+                      angle: math.pi / -4,
+                      child: Icon(
+                        Icons.favorite,
+                        color: const Color(0xFF4285F4),
+                        size: iconsize,
                       ),
-                      Transform.rotate(
-                        origin: Offset(0.0, 0.0),
-                        angle: math.pi / -4 * 3,
-                        child: Icon(
-                          Icons.favorite,
-                          color: const Color(0xFF0F9D58),
-                          size: iconsize,
-                        ),
+                    ),
+                    Transform.rotate(
+                      origin: Offset(0.0, 0.0),
+                      angle: math.pi / -4 * 3,
+                      child: Icon(
+                        Icons.favorite,
+                        color: const Color(0xFF0F9D58),
+                        size: iconsize,
                       ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Transform.rotate(
-                        origin: Offset(0.0, 0.0),
-                        angle: math.pi / 4,
-                        child: Icon(
-                          Icons.favorite,
-                          color: Colors.orange,
-                          size: iconsize,
-                        ),
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Transform.rotate(
+                      origin: Offset(0.0, 0.0),
+                      angle: math.pi / 4,
+                      child: Icon(
+                        Icons.favorite,
+                        color: Colors.orange,
+                        size: iconsize,
                       ),
-                      Transform.rotate(
-                        origin: Offset(0.0, 0.0),
-                        angle: math.pi / 4 * 3,
-                        child: Icon(
-                          Icons.favorite,
-                          color: const Color(0xFFDB4437),
-                          size: iconsize,
-                        ),
+                    ),
+                    Transform.rotate(
+                      origin: Offset(0.0, 0.0),
+                      angle: math.pi / 4 * 3,
+                      child: Icon(
+                        Icons.favorite,
+                        color: const Color(0xFFDB4437),
+                        size: iconsize,
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-          builder: (BuildContext context, Widget child) {
-            return Transform.rotate(
-              angle: _controller.value * math.pi * 10,
-              child: child,
-            );
-          },
         ),
+        builder: (BuildContext context, Widget child) {
+          return Transform.rotate(
+            angle: _controller.value * math.pi * 10,
+            child: child,
+          );
+        },
       ),
     );
   }

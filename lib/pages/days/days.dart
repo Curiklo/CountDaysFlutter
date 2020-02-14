@@ -330,7 +330,7 @@ class _DaysState extends State<Days> {
                   elevation: 0.0,
                   child: ListTile(
                     title: Text(
-                      '${index * 100 + 1600}',
+                      '${(((displaydays ~/ 100) + 1) * 100) + index * 100}',
                       style: TextStyle(
                         fontSize: 20.0,
                         letterSpacing: 2.0,
@@ -338,7 +338,7 @@ class _DaysState extends State<Days> {
                       ),
                     ),
                     subtitle: Text(
-                        '${dateCalculator.aniversaryDateCalculator(1600 + index * 100)}'),
+                        '${dateCalculator.aniversaryDateCalculator((((displaydays ~/ 100) + 1) * 100) + index * 100)}'),
                   ),
                 ),
               );

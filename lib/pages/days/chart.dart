@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:CountDays/services/date_calculator.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -22,16 +23,16 @@ class DaysChartState extends State<DaysChart> {
   final Duration animDuration = Duration(milliseconds: 250);
   VideoPlayerController audiocontroller;
   int touchedIndex;
+  DateCalculator datecalculator = DateCalculator();
 
   bool isPlaying = false;
 
   @override
   void initState() {
     super.initState();
-    audiocontroller = VideoPlayerController.asset('assets/audio/sample.mp3')
-      ..initialize().then((_) {
-        setState(() {});
-      });
+    audiocontroller = VideoPlayerController.asset('assets/audio/sample2.aac');
+    audiocontroller.initialize();
+    audiocontroller.setLooping(true);
   }
 
   @override
@@ -86,7 +87,7 @@ class DaysChartState extends State<DaysChart> {
                   child: IconButton(
                     icon: Icon(
                       isPlaying ? Icons.pause : Icons.play_arrow,
-                      color: Colors.pinkAccent,
+                      color: Colors.transparent,
                       size: 25,
                     ),
                     onPressed: () {
@@ -143,15 +144,15 @@ class DaysChartState extends State<DaysChart> {
   List<BarChartGroupData> showingGroups() => List.generate(5, (i) {
         switch (i) {
           case 0:
-            return makeGroupData(0, 50, isTouched: i == touchedIndex);
+            return makeGroupData(0, datecalculator.graphyear(), isTouched: i == touchedIndex);
           case 1:
-            return makeGroupData(1, 65, isTouched: i == touchedIndex);
+            return makeGroupData(1, datecalculator.graphmonth(), isTouched: i == touchedIndex);
           case 2:
-            return makeGroupData(2, 95, isTouched: i == touchedIndex);
+            return makeGroupData(2, datecalculator.graphweek(), isTouched: i == touchedIndex);
           case 3:
-            return makeGroupData(3, 30, isTouched: i == touchedIndex);
+            return makeGroupData(3, datecalculator.graphday100(), isTouched: i == touchedIndex);
           case 4:
-            return makeGroupData(4, 85, isTouched: i == touchedIndex);
+            return makeGroupData(4, datecalculator.graphday1000(), isTouched: i == touchedIndex);
           default:
             return null;
         }
@@ -160,6 +161,7 @@ class DaysChartState extends State<DaysChart> {
   BarChartData mainBarData() {
     return BarChartData(
       barTouchData: BarTouchData(
+        enabled: false,
         touchTooltipData: BarTouchTooltipData(
             tooltipBgColor: Colors.blueGrey,
             getTooltipItem: (group, groupIndex, rod, rodIndex) {
@@ -297,7 +299,9 @@ class DaysChartState extends State<DaysChart> {
   }
 
   Future<dynamic> refreshState() async {
+    if(this.mounted){
     setState(() {});
+    }
     await Future<dynamic>.delayed(animDuration + Duration(milliseconds: 50));
     if (isPlaying) {
       refreshState();
