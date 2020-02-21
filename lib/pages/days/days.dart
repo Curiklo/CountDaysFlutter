@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:CountDays/pages/days/chart.dart';
+import 'package:CountDays/pages/days/day_text.dart';
+import 'package:CountDays/pages/days/day_tile.dart';
 import 'package:CountDays/services/date_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -11,20 +13,11 @@ class Days extends StatefulWidget {
 }
 
 class _DaysState extends State<Days> {
-  final DateCalculator dateCalculator = DateCalculator();
-  var startDay = DateTime(2015, DateTime.october, 1);
   final lightBackgroundColor = const Color(0xFFEEF2F5);
-  DateTime today;
-  Timer timer;
-  int displayweeks;
-  int displaydays;
-  int displayyears;
-  int displaymonth;
 
-  /* because of web
+  //* because of web
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
-  */
 
   @override
   void initState() {
@@ -43,59 +36,26 @@ class _DaysState extends State<Days> {
           initializationSettingsAndroid, initializationSettingsIOS);
       flutterLocalNotificationsPlugin.initialize(initializationSettings,
           onSelectNotification: onSelectNotification);
-          
     }
     */
-
-    timer = Timer.periodic(
-        Duration(milliseconds: 900),
-        (timer) => setState(() {
-              today = DateTime.now();
-              displayweeks = (today.difference(startDay).inDays / 7).floor();
-              displaydays = today.difference(startDay).inDays;
-              displayyears = dateCalculator.dateYear(today);
-              displaymonth = dateCalculator.dateMonth(today);
-            }));
   }
 
-  @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
-  }
-
+  /*
   Future onSelectNotification(String payload) async {
     if (payload != null) {
       debugPrint('notification payload: ' + payload);
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: Text('pyload'),
-          content: Text('content'),
-        ),
-      );
+      Navigator.pushReplacementNamed(context, '/plans');
     }
   }
 
   Future onDidReceiveLocationLocation(
       int id, String title, String body, String payload) async {
-    await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(title),
-            content: Text(body),
-            actions: <Widget>[
-              FlatButton(
-                child: Text(payload),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
+    if (payload != null) {
+      debugPrint('notification payload: ' + payload);
+      Navigator.pushReplacementNamed(context, '/plans');
+    }
   }
+  */
 
   @override
   Widget build(BuildContext context) {
@@ -146,19 +106,7 @@ class _DaysState extends State<Days> {
                             SizedBox(
                               height: 10.0,
                             ),
-                            RichText(
-                              text: TextSpan(
-                                style: TextStyle(
-                                  fontSize: 30.0,
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: 2.0,
-                                  color: Colors.black,
-                                ),
-                                children: [
-                                  TextSpan(text: '  $displaydays'),
-                                ],
-                              ),
-                            ),
+                            DayText(),
                             SizedBox(
                               height: 20.0,
                             ),
@@ -180,19 +128,7 @@ class _DaysState extends State<Days> {
                             SizedBox(
                               height: 10.0,
                             ),
-                            RichText(
-                              text: TextSpan(
-                                style: TextStyle(
-                                  fontSize: 30.0,
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: 2.0,
-                                  color: Colors.black,
-                                ),
-                                children: [
-                                  TextSpan(text: '    $displaymonth'),
-                                ],
-                              ),
-                            ),
+                            MonthText(),
                           ],
                         ),
                         Padding(
@@ -214,7 +150,7 @@ class _DaysState extends State<Days> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0.0, 5.0, 3.0, 5.0),
                       child: InkWell(
-                        onTap: () {}, //shownoti,(not web)
+                        onTap: () {}, //shownoti, //(not web)
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -244,14 +180,7 @@ class _DaysState extends State<Days> {
                                   child: Padding(
                                     padding: const EdgeInsets.fromLTRB(
                                         0.0, 15.0, 0.0, 0.0),
-                                    child: Text(
-                                      '$displayweeks',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: 2.0,
-                                        fontSize: 25.0,
-                                      ),
-                                    ),
+                                    child: WeekText(),
                                   ),
                                 ),
                               ],
@@ -291,14 +220,7 @@ class _DaysState extends State<Days> {
                                 child: Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       0.0, 15.0, 0.0, 0.0),
-                                  child: Text(
-                                    '$displayyears',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: 2.0,
-                                      fontSize: 25.0,
-                                    ),
-                                  ),
+                                  child: YearText(),
                                 ),
                               ),
                             ],
@@ -321,30 +243,7 @@ class _DaysState extends State<Days> {
             ],
           ),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
-                child: Card(
-                  elevation: 0.0,
-                  child: ListTile(
-                    title: Text(
-                      '${(((displaydays ~/ 100) + 1) * 100) + index * 100}',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        letterSpacing: 2.0,
-                        color: Colors.black,
-                      ),
-                    ),
-                    subtitle: Text(
-                        '${dateCalculator.aniversaryDateCalculator((((displaydays ~/ 100) + 1) * 100) + index * 100)}'),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
+        DayTile(),
       ],
     );
   }

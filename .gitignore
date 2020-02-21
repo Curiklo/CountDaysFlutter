@@ -401,6 +401,7 @@ web/index.html
 
 # assets
 assets/audio/
+assets/icons/
 
 # firebase deploy
 .firebase/

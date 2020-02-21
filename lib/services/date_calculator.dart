@@ -12,7 +12,7 @@ class DateCalculator {
   //time format function for app bar
   get appbarDateFormatted {
     initializeDateFormatting("en_us");
-    var formatter = DateFormat.yMMMMEEEEd();
+    var formatter = DateFormat.yMMMEd();
     var formatted = formatter.format(today); // Date to String
     return formatted;
   }
@@ -128,5 +128,11 @@ class DateCalculator {
   //main calculator
   String nextAniversaryDateCalculator() {
     return "";
+  }
+
+  Future<String> listAniversary(int index) async {
+    return aniversaryDateCalculator(
+        (((today.difference(DateTime(2015, 10, 1)).inDays ~/ 100) + 1) * 100) +
+            index * 100);
   }
 }
