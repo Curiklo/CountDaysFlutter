@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'package:provider/provider.dart';
+
 class Loading extends StatefulWidget {
   static const routeName = 'RotationTransition';
 
@@ -30,13 +32,14 @@ class _LoadingState extends State<Loading> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = Provider.of<bool>(context);
     return AnimatedBuilder(
       animation: _controller,
       child: Center(
         child: Container(
           width: 100,
           height: 100,
-          color: lightBackgroundColor,
+          color: isDark ? Colors.blueAccent[900] : lightBackgroundColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,

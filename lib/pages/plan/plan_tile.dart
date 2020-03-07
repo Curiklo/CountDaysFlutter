@@ -11,6 +11,7 @@ class PlanTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = Provider.of<bool>(context);
     void _showSettingsPanel(Plan plan) {
       showDialog(
         context: context,
@@ -20,7 +21,7 @@ class PlanTile extends StatelessWidget {
             child: Dialog(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0)),
-              backgroundColor: const Color(0xFFEEF2F5),
+              backgroundColor: isDark ? Colors.grey[600] : Color(0xFFEEF2F5),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
@@ -39,7 +40,7 @@ class PlanTile extends StatelessWidget {
         builder: (context) {
           return Container(
             decoration: BoxDecoration(
-              color: const Color(0xFFEEF2F5),
+              color: isDark ? Colors.grey[800] : Color(0xFFEEF2F5),
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(16.0),
                   topRight: Radius.circular(16.0)),
@@ -65,9 +66,6 @@ class PlanTile extends StatelessWidget {
           onTap: () {
             _showDetailPanel(plan);
           },
-          onLongPress: () {
-            _showSettingsPanel(plan);
-          },
           child: Column(
             children: <Widget>[
               SizedBox(
@@ -79,22 +77,24 @@ class PlanTile extends StatelessWidget {
                   radius: 30.0,
                   child: Text(
                     '${plan.icon}',
-                    style: TextStyle(fontSize: 40.0),
+                    style: TextStyle(
+                      fontSize: 40.0,
+                      color: Colors.blue[200],
+                    ),
                   ),
                 ),
                 title: Text(plan.titles),
-                subtitle: Text('\n${plan.details}'),
+                subtitle: Text(
+                  '\n${plan.details}',
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                isThreeLine: true,
                 trailing: Icon(
                   Icons.adb,
                   size: 30.0,
                   color: Colors.pink[200],
                 ),
-                onLongPress: () {
-                  _showSettingsPanel(plan);
-                },
-                onTap: () {
-                  _showDetailPanel(plan);
-                },
               ),
               ButtonBar(
                 children: <Widget>[

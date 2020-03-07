@@ -2,6 +2,7 @@ import 'package:CountDays/services/database.dart';
 import 'package:CountDays/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PlanAddForm extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class _PlanAddFormState extends State<PlanAddForm> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = Provider.of<bool>(context);
     return SingleChildScrollView(
       child: Form(
         key: _formKey,
@@ -25,7 +27,10 @@ class _PlanAddFormState extends State<PlanAddForm> {
           children: <Widget>[
             Text(
               'Write your idea .',
-              style: TextStyle(fontSize: 18.0),
+              style: TextStyle(
+                fontSize: 18.0,
+                color: isDark ? Colors.white : Colors.black,
+              ),
             ),
             SizedBox(height: 10.0),
             TextFormField(
@@ -54,6 +59,9 @@ class _PlanAddFormState extends State<PlanAddForm> {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  ),
                   color: Colors.pink[400],
                   child: Text(
                     'Done',

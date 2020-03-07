@@ -14,6 +14,7 @@ class PlanHome extends StatefulWidget {
 class _PlanHomeState extends State<PlanHome> {
   @override
   Widget build(BuildContext context) {
+    bool isDark = Provider.of<bool>(context);
     void _showCreatingPanel() {
       showDialog(
         context: context,
@@ -21,7 +22,7 @@ class _PlanHomeState extends State<PlanHome> {
           return Dialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)),
-            backgroundColor: const Color(0xFFEEF2F5),
+            backgroundColor: isDark ? Colors.grey[600] : Color(0xFFEEF2F5),
             child: Container(
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
@@ -35,7 +36,6 @@ class _PlanHomeState extends State<PlanHome> {
     return StreamProvider<List<Plan>>.value(
       value: DatabaseService().plans,
       child: Scaffold(
-        backgroundColor: Color(0xFFEEF2F5),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -59,7 +59,7 @@ class _PlanHomeState extends State<PlanHome> {
           child: Icon(Icons.add),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8.0))),
-          backgroundColor: Colors.pink,
+          //backgroundColor: Colors.pink,
           onPressed: () {
             _showCreatingPanel();
           },

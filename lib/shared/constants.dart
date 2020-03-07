@@ -4,6 +4,7 @@ const textInputDecoration = InputDecoration(
   fillColor: Colors.white,
   filled: true,
   hintText: "Detail 🍀",
+  hintStyle: TextStyle(color: Colors.grey),
   errorStyle: TextStyle(color: Colors.pink),
   focusedErrorBorder: UnderlineInputBorder(
     borderSide: BorderSide(color: Colors.pink),

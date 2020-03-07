@@ -39,7 +39,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     tabController = new TabController(vsync: this, length: 4);
     _myHandler = _tabs[0];
     tabController.addListener(_handleSelected);
-    
+
     /*because of web
     final FirebaseMessaging _firebaseMessaging = new FirebaseMessaging();
     
@@ -110,72 +110,96 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
-        length: 4,
-        child: Scaffold(
-          backgroundColor: lightBackgroundColor,
-          appBar: _tabs[tabController.index],
-
-          body: TabBarView(
-            controller: tabController,
-            // each tab content
-            children: [
-              //tab1
-              Days(),
-              StreamProvider<Person>.value(
-                value: AuthService().user,
-                child: Container(
-                  //debugShowCheckedModeBanner: false,
-                  child: PlanWrapper(),
-                ),
-              ),
-
-              Center(
-                child: Text('Now I am Building'),
-              ),
-              Setting(),
-            ],
+    bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    return Provider<bool>.value(
+      value: isDark,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          brightness: Brightness.light,
+          primaryColor: lightBackgroundColor,
+          accentColor: Colors.pink,
+          scaffoldBackgroundColor: lightBackgroundColor,
+          buttonTheme: ButtonThemeData(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
           ),
-          /**/
-          //bottomNavigationBar: Footer(),
-          bottomNavigationBar: SafeArea(
-            child: Material(
-              child: TabBar(
-                controller: tabController,
-                //isScrollable: true,
-                unselectedLabelColor: Colors.black.withOpacity(0.3),
-                unselectedLabelStyle: TextStyle(fontSize: 12.0),
-                labelColor: Colors.black,
-                labelStyle: TextStyle(fontSize: 16.0),
-                indicatorColor: Colors.pink,
-                indicatorWeight: 2.0,
+        ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          accentColor: Colors.pink,
+          buttonTheme: ButtonThemeData(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          ),
+        ),
+        home: DefaultTabController(
+          length: 4,
+          child: Scaffold(
+            appBar: _tabs[tabController.index],
 
-                // content of tab
-                tabs: [
-                  Tab(
-                    child: Icon(
-                      Icons.favorite,
-                      color: Colors.pink,
-                    ),
+            body: TabBarView(
+              controller: tabController,
+              // each tab content
+              children: [
+                //tab1
+                Days(),
+                StreamProvider<Person>.value(
+                  value: AuthService().user,
+                  child: Container(
+                    child: PlanWrapper(),
                   ),
-                  Tab(
-                    child: Icon(
-                      Icons.explore,
+                ),
+
+                Center(
+                  child: Text('Now I am Building'),
+                ),
+                Setting(),
+              ],
+            ),
+            /**/
+            //bottomNavigationBar: Footer(),
+            bottomNavigationBar: SafeArea(
+              child: Material(
+                child: TabBar(
+                  controller: tabController,
+                  //isScrollable: true,
+                  unselectedLabelColor: isDark
+                      ? Colors.white.withOpacity(0.3)
+                      : Colors.black.withOpacity(0.3),
+                  unselectedLabelStyle: TextStyle(fontSize: 12.0),
+                  labelColor: Colors.pink[400],
+                  labelStyle: TextStyle(fontSize: 16.0),
+                  indicatorColor: Colors.pink,
+                  indicatorWeight: 2.0,
+
+                  // content of tab
+                  tabs: [
+                    Tab(
+                      child: Icon(
+                        Icons.favorite,
+                        //color: Colors.pink,
+                      ),
                     ),
-                  ),
-                  Tab(
-                    child: Icon(
-                      Icons.photo_album,
+                    Tab(
+                      child: Icon(
+                        Icons.explore,
+                      ),
                     ),
-                  ),
-                  Tab(
-                    child: Icon(
-                      Icons.settings,
+                    Tab(
+                      child: Icon(
+                        Icons.photo_album,
+                      ),
                     ),
-                  ),
-                ],
+                    Tab(
+                      child: Icon(
+                        Icons.settings,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

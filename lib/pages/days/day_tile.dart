@@ -53,7 +53,6 @@ class _DayTileState extends State<DayTile> {
                   style: TextStyle(
                     fontSize: 20.0,
                     letterSpacing: 2.0,
-                    color: Colors.black,
                   ),
                 ),
                 subtitle: Text(

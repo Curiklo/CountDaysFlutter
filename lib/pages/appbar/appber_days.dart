@@ -13,7 +13,6 @@ class _AppBarDaysState extends State<AppBarDays> {
   Timer timer;
   String appbardisplaydays;
   DateCalculator datetimecalculator = DateCalculator();
-  final lightBackgroundColor = const Color(0xFFEEF2F5);
 
   @override
   void initState() {
@@ -37,7 +36,6 @@ class _AppBarDaysState extends State<AppBarDays> {
       title: Text(
         'Count Days',
         style: TextStyle(
-          color: Colors.black,
           fontSize: 30.0,
         ),
       ),
@@ -46,13 +44,11 @@ class _AppBarDaysState extends State<AppBarDays> {
           child: Text(
             '$appbardisplaydays   ',
             style: TextStyle(
-              color: Colors.black,
               fontSize: 16.0,
             ),
           ),
         ),
       ],
-      backgroundColor: lightBackgroundColor,
       elevation: 1.0,
     );
   }

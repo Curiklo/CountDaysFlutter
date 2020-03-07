@@ -34,15 +34,16 @@ class _StartLoadingState extends State<StartLoading>
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Container(
-      color: lightBackgroundColor,
+      color: isDark ? Colors.blueAccent[900] : lightBackgroundColor,
       child: AnimatedBuilder(
         animation: _controller,
         child: Center(
           child: Container(
             width: 100,
             height: 100,
-            color: lightBackgroundColor,
+            color: isDark ? Colors.blueAccent[900] : lightBackgroundColor,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,

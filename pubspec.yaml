@@ -33,6 +33,7 @@ dependencies:
   video_player_web: ^0.1.2
   firebase_messaging: ^6.0.9
   flutter_local_notifications: ^1.1.6
+  url_launcher: ^5.4.2
 
 dev_dependencies:
   flutter_test:

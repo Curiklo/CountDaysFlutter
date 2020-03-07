@@ -44,14 +44,14 @@ class _SignInState extends State<SignIn> {
                       child: FlatButton.icon(
                         icon: Icon(Icons.person),
                         label: Text('Register'),
-                        color: Colors.white,
+                        color: Colors.pinkAccent[100],
                         onPressed: () => widget.toggleView(),
                       ),
                     ),
                     SizedBox(height: 20.0),
                     TextFormField(
                       decoration:
-                          textInputDecoration.copyWith(hintText: 'email'),
+                          textInputDecoration.copyWith(hintText: 'Email'),
                       validator: (val) => val.isEmpty ? 'Enter an email' : null,
                       onChanged: (val) {
                         setState(() => email = val);
@@ -61,7 +61,7 @@ class _SignInState extends State<SignIn> {
                     TextFormField(
                       obscureText: true,
                       decoration:
-                          textInputDecoration.copyWith(hintText: 'password'),
+                          textInputDecoration.copyWith(hintText: 'Password'),
                       validator: (val) => val.length < 6
                           ? 'Enter a password 6+ chars long'
                           : null,
@@ -71,9 +71,6 @@ class _SignInState extends State<SignIn> {
                     ),
                     SizedBox(height: 20.0),
                     RaisedButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
                         color: Colors.pink,
                         child: Text(
                           'Sign In',

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:CountDays/services/date_calculator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DayText extends StatefulWidget {
   @override
@@ -33,13 +34,14 @@ class _DayTextState extends State<DayText> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = Provider.of<bool>(context);
     return RichText(
       text: TextSpan(
         style: TextStyle(
           fontSize: 30.0,
           fontWeight: FontWeight.w600,
           letterSpacing: 2.0,
-          color: Colors.black,
+          color: isDark ? Colors.white : Colors.black,
         ),
         children: [
           TextSpan(text: '  $displaydays'),
@@ -122,13 +124,14 @@ class _MonthTextState extends State<MonthText> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = Provider.of<bool>(context);
     return RichText(
       text: TextSpan(
         style: TextStyle(
           fontSize: 30.0,
           fontWeight: FontWeight.w600,
           letterSpacing: 2.0,
-          color: Colors.black,
+          color: isDark ? Colors.white : Colors.black,
         ),
         children: [
           TextSpan(text: ' $displaymonths'),

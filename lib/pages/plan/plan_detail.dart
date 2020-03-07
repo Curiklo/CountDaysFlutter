@@ -25,7 +25,7 @@ class _PlanDetailSheetState extends State<PlanDetailSheet> {
                 SizedBox(height: 20.0),
                 Text(
                   '${plan.icon}',
-                  style: TextStyle(fontSize: 30.0),
+                  style: TextStyle(fontSize: 50.0),
                 ),
                 SizedBox(height: 20.0),
                 Text(

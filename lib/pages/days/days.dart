@@ -1,11 +1,9 @@
-import 'dart:async';
-import 'dart:io';
 import 'package:CountDays/pages/days/chart.dart';
 import 'package:CountDays/pages/days/day_text.dart';
 import 'package:CountDays/pages/days/day_tile.dart';
-import 'package:CountDays/services/date_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:provider/provider.dart';
 
 class Days extends StatefulWidget {
   @override
@@ -14,15 +12,16 @@ class Days extends StatefulWidget {
 
 class _DaysState extends State<Days> {
   final lightBackgroundColor = const Color(0xFFEEF2F5);
+  final darkbackgroundColor = Colors.grey[800];
 
-  //* because of web
+  /* because of web
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
   @override
   void initState() {
     super.initState();
-    /*because of web
+    
     if (Platform.isIOS ||
         Platform.isAndroid ||
         Platform.isMacOS ||
@@ -37,10 +36,10 @@ class _DaysState extends State<Days> {
       flutterLocalNotificationsPlugin.initialize(initializationSettings,
           onSelectNotification: onSelectNotification);
     }
-    */
+    
   }
 
-  /*
+  
   Future onSelectNotification(String payload) async {
     if (payload != null) {
       debugPrint('notification payload: ' + payload);
@@ -59,6 +58,8 @@ class _DaysState extends State<Days> {
 
   @override
   Widget build(BuildContext context) {
+    //print('${MediaQuery.of(context).platformBrightness}');
+    bool isDark = Provider.of<bool>(context);
     return CustomScrollView(
       slivers: <Widget>[
         SliverList(
@@ -79,7 +80,7 @@ class _DaysState extends State<Days> {
                   height: 200,
                   width: 800,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: isDark ? darkbackgroundColor : Colors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Container(
@@ -95,7 +96,7 @@ class _DaysState extends State<Days> {
                                   style: TextStyle(
                                     fontSize: 20.0,
                                     //letterSpacing: 2.0,
-                                    color: Colors.black,
+                                    color: isDark ? Colors.white : Colors.black,
                                   ),
                                   children: [
                                     TextSpan(text: 'Days🌅'),
@@ -117,10 +118,10 @@ class _DaysState extends State<Days> {
                                   style: TextStyle(
                                     fontSize: 20.0,
                                     //letterSpacing: 2.0,
-                                    color: Colors.black,
+                                    color: isDark ? Colors.white : Colors.black,
                                   ),
                                   children: [
-                                    TextSpan(text: 'Month🌕'),
+                                    TextSpan(text: 'Months🌕'),
                                   ],
                                 ),
                               ),
@@ -153,7 +154,7 @@ class _DaysState extends State<Days> {
                         onTap: () {}, //shownoti, //(not web)
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: isDark ? darkbackgroundColor : Colors.white,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           height: 100,
@@ -168,7 +169,7 @@ class _DaysState extends State<Days> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(1.0),
                                     child: Text(
-                                      'Week🎯',
+                                      'Weeks🎯',
                                       style: TextStyle(
                                         fontSize: 20.0,
                                       ),
@@ -193,8 +194,8 @@ class _DaysState extends State<Days> {
                       padding: const EdgeInsets.fromLTRB(5.0, 5.0, 3.0, 5.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
+                          color: isDark ? darkbackgroundColor : Colors.white,
+                          borderRadius: BorderRadius.circular(12.0),
                         ),
                         height: 100,
                         width: MediaQuery.of(context).size.width / 2 - 20,
@@ -208,7 +209,7 @@ class _DaysState extends State<Days> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(1.0),
                                   child: Text(
-                                    'Year🌎',
+                                    'Years🌎',
                                     style: TextStyle(
                                       fontSize: 20.0,
                                     ),
@@ -239,7 +240,7 @@ class _DaysState extends State<Days> {
                     fontSize: 20.0,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

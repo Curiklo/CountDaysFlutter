@@ -22,6 +22,7 @@ class _SettingsFormState extends State<SettingsForm> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = Provider.of<bool>(context);
     Plan plan = Provider.of<Plan>(context);
     return StreamBuilder<PlanData>(
       stream: DatabaseService(titles: plan.uid).planData,
@@ -35,7 +36,10 @@ class _SettingsFormState extends State<SettingsForm> {
                 children: <Widget>[
                   Text(
                     'Edit   idea',
-                    style: TextStyle(fontSize: 18.0),
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
                   ),
                   SizedBox(height: 20.0),
                   TextFormField(
@@ -73,6 +77,9 @@ class _SettingsFormState extends State<SettingsForm> {
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        ),
                         color: Colors.pink[400],
                         child: Text(
                           'Done',

@@ -41,13 +41,13 @@ class _RegisterState extends State<Register> {
                     child: FlatButton.icon(
                       icon: Icon(Icons.person),
                       label: Text('Sign In'),
-                      color: Colors.white,
+                      color: Colors.pinkAccent[100],
                       onPressed: () => widget.toggleView(),
                     ),
                   ),
                   SizedBox(height: 20.0),
                   TextFormField(
-                    decoration: textInputDecoration.copyWith(hintText: 'email'),
+                    decoration: textInputDecoration.copyWith(hintText: 'Email'),
                     validator: (val) => val.isEmpty ? 'Enter an email' : null,
                     onChanged: (val) {
                       setState(() => email = val);
@@ -56,7 +56,7 @@ class _RegisterState extends State<Register> {
                   SizedBox(height: 20.0),
                   TextFormField(
                     decoration:
-                        textInputDecoration.copyWith(hintText: 'password'),
+                        textInputDecoration.copyWith(hintText: 'Password'),
                     validator: (val) => val.length < 6
                         ? 'Enter a password 6+ chars long'
                         : null,
@@ -67,9 +67,6 @@ class _RegisterState extends State<Register> {
                   ),
                   SizedBox(height: 20.0),
                   RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
                       color: Colors.pink,
                       child: Text(
                         'Register',
