@@ -1,7 +1,7 @@
 import 'package:CountDays/models/plan.dart';
 import 'package:CountDays/models/user.dart';
 import 'package:CountDays/pages/loading.dart';
-import 'package:CountDays/services/database.dart';
+import 'package:CountDays/services/database_plan.dart';
 import 'package:CountDays/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ class _SettingsFormState extends State<SettingsForm> {
     bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     Plan plan = Provider.of<Plan>(context);
     return StreamBuilder<PlanData>(
-      stream: DatabaseService(titles: plan.uid).planData,
+      stream: DatabaseServicePlan(titles: plan.uid).planData,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           PlanData planData = snapshot.data;
@@ -90,7 +90,7 @@ class _SettingsFormState extends State<SettingsForm> {
                             print(_currenticon);
                             print(_currenttitle);
                             print(_currentdetail);
-                            await DatabaseService().updatePlanData(
+                            await DatabaseServicePlan().updatePlanData(
                               Timestamp.now(),
                               plan.uid,
                               _currenttitle ?? snapshot.data.titles,

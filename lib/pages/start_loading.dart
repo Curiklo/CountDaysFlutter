@@ -23,7 +23,7 @@ class _StartLoadingState extends State<StartLoading>
       vsync: this,
     )..repeat();
     Timer(Duration(milliseconds: 10),
-        () => Navigator.pushReplacementNamed(context, '/home'));
+        () => Navigator.pushReplacementNamed(context, '/authwrapper'));
   }
 
   @override

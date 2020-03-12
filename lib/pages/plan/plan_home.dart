@@ -1,6 +1,6 @@
 import 'package:CountDays/models/plan.dart';
 import 'package:CountDays/pages/plan/plan_add.dart';
-import 'package:CountDays/services/database.dart';
+import 'package:CountDays/services/database_plan.dart';
 import 'package:CountDays/pages/plan/plan_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class _PlanHomeState extends State<PlanHome> {
     }
 
     return StreamProvider<List<Plan>>.value(
-      value: DatabaseService().plans,
+      value: DatabaseServicePlan().plans,
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(

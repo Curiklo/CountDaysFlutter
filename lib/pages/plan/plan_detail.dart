@@ -1,7 +1,7 @@
 import 'package:CountDays/models/plan.dart';
 import 'package:CountDays/models/user.dart';
 import 'package:CountDays/pages/loading.dart';
-import 'package:CountDays/services/database.dart';
+import 'package:CountDays/services/database_plan.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +15,7 @@ class _PlanDetailSheetState extends State<PlanDetailSheet> {
   Widget build(BuildContext context) {
     Plan plan = Provider.of<Plan>(context);
     return StreamBuilder<PlanData>(
-      stream: DatabaseService(titles: plan.uid).planData,
+      stream: DatabaseServicePlan(titles: plan.uid).planData,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return SingleChildScrollView(

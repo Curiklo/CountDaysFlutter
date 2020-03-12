@@ -1,12 +1,12 @@
 //This is wrapper to decide which pages (plan or authenticate) show
 
 import 'package:CountDays/models/user.dart';
-import 'package:CountDays/pages/plan/authenticate.dart';
-import 'package:CountDays/pages/plan/plan_home.dart';
+import 'package:CountDays/pages/auth/authenticate.dart';
+import 'package:CountDays/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PlanWrapper extends StatelessWidget {
+class AuthWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<Person>(context);
@@ -15,7 +15,7 @@ class PlanWrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      return PlanHome();
+      return Home();
     }
   }
 }

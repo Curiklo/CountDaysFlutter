@@ -1,4 +1,4 @@
-import 'package:CountDays/services/database.dart';
+import 'package:CountDays/services/database_plan.dart';
 import 'package:CountDays/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +68,7 @@ class _PlanAddFormState extends State<PlanAddForm> {
                   ),
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
-                      await DatabaseService().createPlanData(
+                      await DatabaseServicePlan().createPlanData(
                         Timestamp.now(),
                         _currenttitle ?? 'Somethig went wrong',
                         _currentdetail ?? 'Somethig went wrong',

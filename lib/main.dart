@@ -1,4 +1,4 @@
-import 'package:CountDays/pages/home.dart';
+import 'package:CountDays/pages/auth/auth_home.dart';
 import 'package:CountDays/pages/start_loading.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       initialRoute: '/',
       routes: {
         '/': (context) => StartLoading(),
-        '/home': (context) => Home(),
+        '/authwrapper': (context) => AuthHome(),
       },
     );
   }

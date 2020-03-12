@@ -1,6 +1,6 @@
-import 'package:CountDays/pages/plan/signIn.dart';
+import 'package:CountDays/pages/auth/register.dart';
+import 'package:CountDays/pages/auth/signIn.dart';
 import 'package:flutter/material.dart';
-import 'package:CountDays/pages/plan/register.dart';
 
 class Authenticate extends StatefulWidget {
   @override

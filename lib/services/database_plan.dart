@@ -2,9 +2,9 @@ import 'package:CountDays/models/plan.dart';
 import 'package:CountDays/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class DatabaseService {
+class DatabaseServicePlan {
   final String titles;
-  DatabaseService({this.titles});
+  DatabaseServicePlan({this.titles});
 
   // collection reference
   final CollectionReference planCollection =

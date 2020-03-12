@@ -3,12 +3,12 @@ import 'package:CountDays/pages/appbar/appbar_plans.dart';
 import 'package:CountDays/pages/appbar/appbar_setting.dart';
 import 'package:CountDays/pages/appbar/appber_days.dart';
 import 'package:CountDays/pages/days/days.dart';
-import 'package:CountDays/pages/plan/plan_wrapper.dart';
+import 'package:CountDays/pages/plan/plan_home.dart';
 import 'package:CountDays/pages/setting/setting.dart';
+import 'package:CountDays/services/database_user.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:CountDays/services/date_calculator.dart';
-import 'package:CountDays/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:CountDays/models/user.dart';
 
@@ -110,9 +110,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
-    return Provider<bool>.value(
-      value: isDark,
+    bool isDark = Provider.of<bool>(context);
+    final user = Provider.of<Person>(context);
+    return StreamProvider<Person>.value(
+      value: DatabaseServiceUser().user(user),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -146,13 +147,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               children: [
                 //tab1
                 Days(),
-                StreamProvider<Person>.value(
-                  value: AuthService().user,
-                  child: Container(
-                    child: PlanWrapper(),
-                  ),
-                ),
-
+                PlanHome(),
                 Center(
                   child: Text('Now I am Building'),
                 ),

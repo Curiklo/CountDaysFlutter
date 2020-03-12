@@ -1,21 +1,26 @@
+import 'package:CountDays/models/user.dart';
+import 'package:CountDays/pages/appbar/appber_days.dart';
 import 'package:CountDays/services/auth.dart';
-import 'package:flutter/material.dart';
+import 'package:CountDays/services/database_user.dart';
 import 'package:CountDays/shared/constants.dart';
 import 'package:CountDays/pages/loading.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function toggleView;
 
-  SignIn({this.toggleView});
+  Register({this.toggleView});
 
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
+  final DatabaseServiceUser databaseServiceUser = DatabaseServiceUser();
 
-  //unique key for form
+  //unique key for each form
   final _formKey = GlobalKey<FormState>();
   String error = '';
 
@@ -28,13 +33,13 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    //print("singin");
-    return loading
-        ? Loading()
-        : Container(
-            height: MediaQuery.of(context).size.height,
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-            child: SingleChildScrollView(
+    bool isDark = Provider.of<bool>(context);
+    return Scaffold(
+      appBar: AppBarDays(),
+      body: loading
+          ? Loading()
+          : Container(
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -43,13 +48,15 @@ class _SignInState extends State<SignIn> {
                       alignment: Alignment.centerRight,
                       child: FlatButton.icon(
                         icon: Icon(Icons.person),
-                        label: Text('Register'),
+                        label: Text('Sign In'),
                         color: Colors.pinkAccent[100],
                         onPressed: () => widget.toggleView(),
                       ),
                     ),
                     SizedBox(height: 20.0),
                     TextFormField(
+                      style: TextStyle(
+                          color: isDark ? Colors.black : Colors.white),
                       decoration:
                           textInputDecoration.copyWith(hintText: 'Email'),
                       validator: (val) => val.isEmpty ? 'Enter an email' : null,
@@ -59,12 +66,14 @@ class _SignInState extends State<SignIn> {
                     ),
                     SizedBox(height: 20.0),
                     TextFormField(
-                      obscureText: true,
+                      style: TextStyle(
+                          color: isDark ? Colors.black : Colors.white),
                       decoration:
                           textInputDecoration.copyWith(hintText: 'Password'),
                       validator: (val) => val.length < 6
                           ? 'Enter a password 6+ chars long'
                           : null,
+                      obscureText: true,
                       onChanged: (val) {
                         setState(() => password = val);
                       },
@@ -73,22 +82,22 @@ class _SignInState extends State<SignIn> {
                     RaisedButton(
                         color: Colors.pink,
                         child: Text(
-                          'Sign In',
+                          'Register',
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () async {
                           //print(email);
                           //print(password);
-                          //if validate each form
                           if (_formKey.currentState.validate()) {
                             setState(() => loading = true);
                             dynamic result = await _auth
-                                .signInWithEmailAndPassword(email, password);
+                                .registerWithEmailAndPassword(email, password);
+                            Person person = Person(uid: result.uid);
+                            databaseServiceUser.updateFetureData(person);
                             if (result == null) {
                               setState(() {
                                 loading = false;
-                                error =
-                                    'Could not sign in with those credentials';
+                                error = 'Please supply a valid email';
                               });
                             }
                           }
@@ -97,11 +106,11 @@ class _SignInState extends State<SignIn> {
                     Text(
                       error,
                       style: TextStyle(color: Colors.red, fontSize: 14.0),
-                    )
+                    ),
                   ],
                 ),
               ),
             ),
-          );
+    );
   }
 }

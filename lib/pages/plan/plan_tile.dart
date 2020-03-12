@@ -1,7 +1,7 @@
 import 'package:CountDays/models/plan.dart';
 import 'package:CountDays/pages/plan/plan_detail.dart';
 import 'package:CountDays/pages/plan/plan_setting.dart';
-import 'package:CountDays/services/database.dart';
+import 'package:CountDays/services/database_plan.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -121,7 +121,7 @@ class PlanTile extends StatelessWidget {
                         color: Colors.white,
                       ),
                       onPressed: () {
-                        DatabaseService().deletePlanData(plan);
+                        DatabaseServicePlan().deletePlanData(plan);
                       },
                       color: Colors.blue,
                     ),
