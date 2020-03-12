@@ -22,7 +22,7 @@ class _SettingsFormState extends State<SettingsForm> {
 
   @override
   Widget build(BuildContext context) {
-    bool isDark = Provider.of<bool>(context);
+    bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     Plan plan = Provider.of<Plan>(context);
     return StreamBuilder<PlanData>(
       stream: DatabaseService(titles: plan.uid).planData,

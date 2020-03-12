@@ -2,7 +2,6 @@ import 'package:CountDays/services/database.dart';
 import 'package:CountDays/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class PlanAddForm extends StatefulWidget {
   @override
@@ -19,7 +18,7 @@ class _PlanAddFormState extends State<PlanAddForm> {
 
   @override
   Widget build(BuildContext context) {
-    bool isDark = Provider.of<bool>(context);
+    bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return SingleChildScrollView(
       child: Form(
         key: _formKey,

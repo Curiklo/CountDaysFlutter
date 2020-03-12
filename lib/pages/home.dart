@@ -4,7 +4,7 @@ import 'package:CountDays/pages/appbar/appbar_setting.dart';
 import 'package:CountDays/pages/appbar/appber_days.dart';
 import 'package:CountDays/pages/days/days.dart';
 import 'package:CountDays/pages/plan/plan_wrapper.dart';
-import 'package:CountDays/pages/setting.dart';
+import 'package:CountDays/pages/setting/setting.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:CountDays/services/date_calculator.dart';

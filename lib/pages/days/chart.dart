@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:CountDays/services/date_calculator.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class DaysChart extends StatefulWidget {
@@ -164,6 +165,7 @@ class DaysChartState extends State<DaysChart> {
       });
 
   BarChartData mainBarData() {
+    bool isDark = Provider.of<bool>(context);
     return BarChartData(
       barTouchData: BarTouchData(
         enabled: false,
@@ -208,6 +210,7 @@ class DaysChartState extends State<DaysChart> {
         bottomTitles: SideTitles(
           showTitles: true,
           textStyle: TextStyle(
+            color: isDark ? Colors.white : Colors.black,
             fontWeight: FontWeight.bold,
             fontSize: 14,
           ),

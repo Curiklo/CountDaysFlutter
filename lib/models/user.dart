@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Person {
   final String uid;
-
   Person({this.uid});
 }
 
