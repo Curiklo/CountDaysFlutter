@@ -1,5 +1,5 @@
 import 'package:CountDays/models/user.dart';
-import 'package:CountDays/pages/Setting/setting_info.dart';
+import 'package:CountDays/pages/setting/setting_info.dart';
 import 'package:CountDays/pages/setting/setting_account.dart';
 import 'package:CountDays/services/database_user.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,7 +23,6 @@ class _SettingState extends State<Setting> {
 
     bool isDark = Provider.of<bool>(context);
     Person person = Provider.of<Person>(context);
-    bool noti = person.feature[0];
     print(person.uid);
     print(person.feature);
     return Column(
@@ -69,12 +68,8 @@ class _SettingState extends State<Setting> {
             title: Text('Notification'),
             subtitle: Text('Experiment Status'),
             trailing: CupertinoSwitch(
-              value: noti,
-              onChanged: (bool newValue) {
-                setState(() {
-                  noti = newValue;
-                });
-              },
+              value: person.feature[0],
+              onChanged: null,
               activeColor: Colors.pink,
             ),
           ),

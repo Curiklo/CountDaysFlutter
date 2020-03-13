@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:CountDays/pages/auth/auth_home.dart';
 import 'package:CountDays/pages/start_loading.dart';
 import 'package:flutter/material.dart';
@@ -12,16 +14,36 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   //grey color
   final lightBackgroundColor = const Color(0xFFEEF2F5);
-
+  //bool kisweb;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => StartLoading(),
-        '/authwrapper': (context) => AuthHome(),
-      },
-    );
+    print(kIsWeb);
+    if (kIsWeb) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        routes: {
+          '/': (context) => StartLoading(),
+          '/authwrapper': (context) => AuthHome(),
+        },
+      );
+    } else if (Platform.isAndroid) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        routes: {
+          '/': (context) => AuthHome(),
+        },
+      );
+    } else {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        routes: {
+          '/': (context) => StartLoading(),
+          '/authwrapper': (context) => AuthHome(),
+        },
+      );
+    }
   }
 }

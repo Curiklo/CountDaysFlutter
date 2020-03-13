@@ -407,3 +407,10 @@ assets/icons/
 .firebase/
 .firebaserc
 firebase.json
+
+#splash screen
+android/app/src/main/res/mipmap-hdpi/app_icon.png
+android/app/src/main/res/mipmap-mdpi/app_icon.png
+android/app/src/main/res/mipmap-xhdpi/app_icon.png
+android/app/src/main/res/mipmap-xxhdpi/app_icon.png
+android/app/src/main/res/mipmap-xxxhdpi/app_icon.png

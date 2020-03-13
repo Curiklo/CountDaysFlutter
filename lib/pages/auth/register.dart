@@ -92,9 +92,10 @@ class _RegisterState extends State<Register> {
                             setState(() => loading = true);
                             dynamic result = await _auth
                                 .registerWithEmailAndPassword(email, password);
-                            Person person = Person(uid: result.uid);
-                            databaseServiceUser.updateFetureData(person);
-                            if (result == null) {
+                            if (result != null) {
+                              Person person = Person(uid: result.uid);
+                              databaseServiceUser.updateFetureData(person);
+                            } else {
                               setState(() {
                                 loading = false;
                                 error = 'Please supply a valid email';

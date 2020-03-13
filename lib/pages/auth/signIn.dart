@@ -97,11 +97,12 @@ class _SignInState extends State<SignIn> {
                               setState(() => loading = true);
                               dynamic result = await _auth
                                   .signInWithEmailAndPassword(email, password);
-                              Person person = Person(uid: result.uid);
-                              databaseServiceUser.updateFetureData(person);
-                              print(person.uid);
-                              print(person.feature);
-                              if (result == null) {
+                              if (result != null) {
+                                Person person = Person(uid: result.uid);
+                                databaseServiceUser.updateFetureData(person);
+                                print(person.uid);
+                                print(person.feature);
+                              } else {
                                 setState(() {
                                   loading = false;
                                   error =
