@@ -47,9 +47,9 @@ class DateCalculator {
   //calculate display month
   int dateMonth(DateTime today) {
     if (9 < today.month) {
-      return 12 * dateYear(today) + today.month;
-    } else {
       return 12 * dateYear(today) + today.month - 10;
+    } else {
+      return 12 * dateYear(today) + today.month + 2;
     }
   }
 

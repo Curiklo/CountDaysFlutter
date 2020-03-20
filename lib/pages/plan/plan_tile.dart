@@ -61,6 +61,7 @@ class PlanTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 6.0),
       child: Card(
+        elevation: 0.0,
         margin: EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
         child: InkWell(
           onTap: () {

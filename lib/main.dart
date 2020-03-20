@@ -14,7 +14,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   //grey color
   final lightBackgroundColor = const Color(0xFFEEF2F5);
-  //bool kisweb;
   @override
   Widget build(BuildContext context) {
     print(kIsWeb);
