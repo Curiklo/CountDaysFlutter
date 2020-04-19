@@ -5,7 +5,6 @@ import 'package:CountDays/services/database_user.dart';
 import 'package:CountDays/shared/constants.dart';
 import 'package:CountDays/pages/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class Register extends StatefulWidget {
   final Function toggleView;
@@ -33,7 +32,6 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    bool isDark = Provider.of<bool>(context);
     return Scaffold(
       appBar: AppBarDays(),
       body: loading
@@ -55,8 +53,7 @@ class _RegisterState extends State<Register> {
                     ),
                     SizedBox(height: 20.0),
                     TextFormField(
-                      style: TextStyle(
-                          color: isDark ? Colors.black : Colors.white),
+                      style: TextStyle(color: Colors.black),
                       decoration:
                           textInputDecoration.copyWith(hintText: 'Email'),
                       validator: (val) => val.isEmpty ? 'Enter an email' : null,
@@ -66,8 +63,7 @@ class _RegisterState extends State<Register> {
                     ),
                     SizedBox(height: 20.0),
                     TextFormField(
-                      style: TextStyle(
-                          color: isDark ? Colors.black : Colors.white),
+                      style: TextStyle(color: Colors.black),
                       decoration:
                           textInputDecoration.copyWith(hintText: 'Password'),
                       validator: (val) => val.length < 6

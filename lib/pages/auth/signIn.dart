@@ -5,7 +5,6 @@ import 'package:CountDays/services/database_user.dart';
 import 'package:flutter/material.dart';
 import 'package:CountDays/shared/constants.dart';
 import 'package:CountDays/pages/loading.dart';
-import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -32,7 +31,6 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    bool isDark = Provider.of<bool>(context);
     //print("singin");
     return Scaffold(
       appBar: AppBarDays(),
@@ -57,8 +55,7 @@ class _SignInState extends State<SignIn> {
                       ),
                       SizedBox(height: 20.0),
                       TextFormField(
-                        style: TextStyle(
-                            color: isDark ? Colors.black : Colors.white),
+                        style: TextStyle(color: Colors.black),
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Email'),
                         validator: (val) =>
@@ -69,8 +66,7 @@ class _SignInState extends State<SignIn> {
                       ),
                       SizedBox(height: 20.0),
                       TextFormField(
-                        style: TextStyle(
-                            color: isDark ? Colors.black : Colors.white),
+                        style: TextStyle(color: Colors.black),
                         obscureText: true,
                         decoration: textInputDecoration.copyWith(
                           hintText: 'Password',
