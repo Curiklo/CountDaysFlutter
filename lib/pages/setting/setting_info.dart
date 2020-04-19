@@ -25,7 +25,7 @@ class SettingInfo extends StatelessWidget {
             child: ListTile(
               leading: Icon(Icons.flight_takeoff),
               title: Text('Version'),
-              subtitle: Text('0.0.3'),
+              subtitle: Text('0.0.6'),
             ),
           ),
           Container(
